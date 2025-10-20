@@ -1,16 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.2d8cbe2a.css",
-    "main.js": "/static/js/main.ccf45449.js",
-    "static/js/453.ccc7a13f.chunk.js": "/static/js/453.ccc7a13f.chunk.js",
-    "static/media/logo.png": "/static/media/logo.3c61059daebe8fc31d36.png",
+    "main.css": "/static/css/main.768773fe.css",
+    "main.js": "/static/js/main.c1fc2d6b.js",
+    "static/media/xourcebase-logo.png": "/static/media/xourcebase-logo.9048e094520803e76835.png",
     "index.html": "/index.html",
-    "main.2d8cbe2a.css.map": "/static/css/main.2d8cbe2a.css.map",
-    "main.ccf45449.js.map": "/static/js/main.ccf45449.js.map",
-    "453.ccc7a13f.chunk.js.map": "/static/js/453.ccc7a13f.chunk.js.map"
+    "main.768773fe.css.map": "/static/css/main.768773fe.css.map",
+    "main.c1fc2d6b.js.map": "/static/js/main.c1fc2d6b.js.map"
   },
   "entrypoints": [
-    "static/css/main.2d8cbe2a.css",
-    "static/js/main.ccf45449.js"
+    "static/css/main.768773fe.css",
+    "static/js/main.c1fc2d6b.js"
   ]
 }
