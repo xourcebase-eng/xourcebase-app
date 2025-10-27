@@ -12,9 +12,10 @@ const About = () => {
   ];
 
   const teamMembers = [
-    { name: 'Abhijeet Kumar', role: 'Founder & CEO', avatar: 'https://via.placeholder.com/80?text=AK' },
-    { name: 'Priya Singh', role: 'Lead Mentor', avatar: 'https://via.placeholder.com/80?text=PS' },
-    { name: 'Rahul Mehta', role: 'Tech Lead', avatar: 'https://via.placeholder.com/80?text=RM' },
+    { name: 'Abhijeet Vishwakarma', role: 'Lead Mentor', avatar: 'https://via.placeholder.com/80?text=AK' },
+    { name: 'Satyam Mishra', role: 'Lead Mentor', avatar: 'https://via.placeholder.com/80?text=PS' },
+    { name: 'Rehan Khan', role: 'Lead Mentor', avatar: 'https://via.placeholder.com/80?text=RM' },
+    { name: 'Priyanshu Prajapati', role: 'Lead Mentor', avatar: 'https://via.placeholder.com/80?text=RM' },
   ];
 
   return (
@@ -29,10 +30,18 @@ const About = () => {
           className="text-center mb-16"
         >
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
-            About XourceBase 👋
+            About XourceBase
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            We're passionate about turning dreams into careers. A team of dedicated mentors and innovators helping you navigate from potential to professional success.
+            XourceBase is a next-generation career acceleration and professional training platform dedicated to helping students, fresh graduates, and working professionals unlock their full potential.
+          </p>
+          <br/>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            At XourceBase, we bridge the gap between education and employability by offering industry-aligned training, hands-on learning, and personalized mentorship. Our goal is to empower individuals with the right skills, mindset, and confidence to thrive in today’s competitive job market. 
+          </p>
+          <br/>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            We believe true growth begins with practical exposure — that’s why our programs blend real-world projects, mock interviews, and expert-led sessions designed by experienced professionals from the tech and business world. Whether you’re a student preparing for your first interview, a professional looking to upskill, or an organization seeking workforce readiness programs, XourceBase is your trusted partner in building a career that stands out. 
           </p>
         </motion.div>
 
@@ -145,7 +154,7 @@ const About = () => {
             Ready to unlock your potential with XourceBase?
           </p>
           <Link
-            to="/pricing"
+            to="/programs"
             className="inline-flex items-center gap-2 px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-indigo-600 to-teal-600 rounded-xl hover:from-indigo-700 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl"
           >
             Explore Programs

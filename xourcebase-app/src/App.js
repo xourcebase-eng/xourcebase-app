@@ -15,6 +15,9 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import Sitemap from './pages/Sitemap';
 import TermsAndConditions from './pages/TermsAndConditions';
 import TeachOnXourceBase from './pages/TeachOnXourceBase';
+import TechCareerAccelerator from './pages/TechCareerAccelerator';
+import CommunicationSupportExcellence from './pages/CommunicationSupportExcellence';
+import Programs from './pages/Programs';
 
 const App = () => {
   return (
@@ -35,6 +38,9 @@ const App = () => {
             <Route path="/sitemap" element={<Sitemap />} />
             <Route path="/terms-conditions" element={<TermsAndConditions />} />
             <Route path="/teach-on-xourcebase" element={<TeachOnXourceBase />} />
+            <Route path="/tech-career-accelerator" element={<TechCareerAccelerator />} />
+            <Route path="/communication-support-excellence" element={<CommunicationSupportExcellence />} />
+            <Route path="/programs" element={<Programs />} />
           </Routes>
         </main>
         <Footer />

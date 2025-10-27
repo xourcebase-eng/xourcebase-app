@@ -27,7 +27,6 @@ const Contact = () => {
         <div className="text-center mb-8 sm:mb-12 animate-fade-in">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 dark:text-white leading-tight mb-4 flex justify-center items-center gap-3">
             Get in Touch
-            <span className="text-3xl sm:text-4xl md:text-5xl">💬</span>
           </h1>
           <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             We’d love to hear from you! Whether you have questions about our programs or partnership opportunities, we’re here to help.
@@ -124,7 +123,7 @@ const Contact = () => {
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 dark:text-gray-500" />
-                  <a href="tel:+1234567890" className="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition">
+                  <a href="tel:+91 8767765307" className="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition">
                     +91 8767765307
                   </a>
                 </div>

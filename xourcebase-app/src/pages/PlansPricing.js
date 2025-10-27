@@ -1,19 +1,46 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Check, Award, Star, Quote, Clock, Mail, Phone, User, Calendar, MessageCircle } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown, Check, Award, Star, Quote, Clock, Mail, Phone, User, Calendar, MessageCircle, Rocket, Zap, Crown } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-const PricingCard = ({ plan, price, primaryGoal, keyObjective, interviewKit, qaSamples, templatesGuides, groupAccess, mockInterviews, personalCoaching, placementSupport, additionalBenefits, valueProp, whyNeed, isRecommended = false }) => {
+const SkeletonCard = () => (
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.4, ease: 'easeOut' }}
+    className="relative flex flex-col p-6 sm:p-8 rounded-xl shadow-lg dark:shadow-gray-700/50 bg-white dark:bg-gray-800 animate-pulse h-full"
+  >
+    <div className="absolute top-4 right-4">
+      <div className="w-16 h-4 bg-gray-200 rounded-full"></div>
+    </div>
+    <div className="flex-grow space-y-4">
+      <div className="h-8 bg-gray-200 rounded w-24"></div>
+      <div className="h-4 bg-gray-200 rounded w-32"></div>
+      <div className="space-y-2">
+        <div className="h-3 bg-gray-200 rounded"></div>
+        <div className="h-3 bg-gray-200 rounded w-4/5"></div>
+        <div className="h-3 bg-gray-200 rounded w-3/5"></div>
+      </div>
+    </div>
+    <div className="mt-auto">
+      <div className="w-full h-12 bg-gray-200 rounded-lg"></div>
+    </div>
+  </motion.div>
+);
+
+const PricingCard = ({ plan, price, primaryGoal, keyObjective, isRecommended = false, duration, icon, index }) => {
   return (
     <motion.div
+      layout
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: 0.4, ease: 'easeOut', delay: index * 0.1 }}
       whileHover={{ y: -5, scale: 1.02 }}
-      className="relative p-6 sm:p-8 rounded-xl shadow-lg dark:shadow-gray-700/50 transition-all duration-300 border-4 group overflow-hidden bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 border-gray-200 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-600"
+      className="relative flex flex-col p-6 sm:p-8 rounded-xl shadow-lg dark:shadow-gray-700/50 transition-all duration-300 border-4 group bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 border-gray-200 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-600 h-full"
     >
       {isRecommended && (
-        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-          <span className="bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1 shadow-lg">
+        <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
+          <span className="bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1 shadow-lg whitespace-nowrap">
             <Award className="w-3 h-3" />
             Most Recommended
           </span>
@@ -24,32 +51,30 @@ const PricingCard = ({ plan, price, primaryGoal, keyObjective, interviewKit, qaS
           {plan}
         </span>
       </div>
-      <h3 className="text-xl sm:text-2xl font-bold mb-2">{price}</h3>
-      <div className="mb-4 text-sm space-y-1">
-        <p className="font-semibold text-indigo-700 dark:text-indigo-300">Primary Goal: {primaryGoal}</p>
-        <p className="font-semibold text-indigo-700 dark:text-indigo-300">Key Objective: {keyObjective}</p>
+      {icon && (
+        <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-indigo-500 to-teal-500 rounded-full mx-auto mb-4">
+          {icon}
+        </div>
+      )}
+      <div className="flex-grow pt-2">
+        <h3 className="text-xl sm:text-2xl font-bold mb-2">{price}</h3>
+        {duration && <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">{duration}</p>}
+        <div className="mb-4 text-sm space-y-1">
+          {primaryGoal && <p className="font-semibold text-indigo-700 dark:text-indigo-300">Primary Goal: {primaryGoal}</p>}
+          {keyObjective && <p className="font-semibold text-indigo-700 dark:text-indigo-300">Key Objective: {keyObjective}</p>}
+        </div>
       </div>
-      <ul className="space-y-2 mb-4 text-sm">
-        <li className="flex items-start"><Check className="mr-2 mt-0.5 w-4 h-4 text-indigo-500 dark:text-indigo-400 flex-shrink-0" />Interview Kit: {interviewKit}</li>
-        <li className="flex items-start"><Check className="mr-2 mt-0.5 w-4 h-4 text-indigo-500 dark:text-indigo-400 flex-shrink-0" />Q&A Samples: {qaSamples}</li>
-        <li className="flex items-start"><Check className="mr-2 mt-0.5 w-4 h-4 text-indigo-500 dark:text-indigo-400 flex-shrink-0" />Templates & Guides: {templatesGuides}</li>
-        <li className="flex items-start"><Check className="mr-2 mt-0.5 w-4 h-4 text-indigo-500 dark:text-indigo-400 flex-shrink-0" />Group Access: {groupAccess}</li>
-        <li className="flex items-start"><Check className="mr-2 mt-0.5 w-4 h-4 text-indigo-500 dark:text-indigo-400 flex-shrink-0" />Mock Interviews: {mockInterviews}</li>
-        <li className="flex items-start"><Check className="mr-2 mt-0.5 w-4 h-4 text-indigo-500 dark:text-indigo-400 flex-shrink-0" />Personal Coaching: {personalCoaching}</li>
-        <li className="flex items-start"><Check className="mr-2 mt-0.5 w-4 h-4 text-indigo-500 dark:text-indigo-400 flex-shrink-0" />Placement Support: {placementSupport}</li>
-        <li className="flex items-start"><Check className="mr-2 mt-0.5 w-4 h-4 text-indigo-500 dark:text-indigo-400 flex-shrink-0" />Additional Benefits: {additionalBenefits}</li>
-      </ul>
-      <div className="mb-4 p-3 bg-indigo-50 dark:bg-indigo-900/30 rounded-lg">
-        <p className="text-xs italic text-gray-600 dark:text-gray-400 mb-2">Value Proposition: {valueProp}</p>
-        <p className="text-xs text-gray-700 dark:text-gray-300">{whyNeed}</p>
+      <div className="mt-auto">
+        <Link to="/contact">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            className="w-full py-3 font-semibold rounded-lg shadow-md transition duration-150 bg-indigo-600 text-white hover:bg-indigo-700 dark:bg-indigo-700 dark:hover:bg-indigo-800"
+          >
+            Enroll Now
+          </motion.button>
+        </Link>
       </div>
-      <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.98 }}
-        className="w-full py-3 font-semibold rounded-lg shadow-md transition duration-150 bg-indigo-600 text-white hover:bg-indigo-700 dark:bg-indigo-700 dark:hover:bg-indigo-800"
-      >
-        Get Started
-      </motion.button>
     </motion.div>
   );
 };
@@ -191,183 +216,101 @@ const FAQ = () => {
   );
 };
 
-const FeatureMatrix = () => {
-  const features = [
-    { name: 'Starter Kit', price: '₹99', primaryGoal: 'Build trust, generate leads, warm up cold traffic', keyObjective: 'Basic interview preparation foundation', interviewKit: '14-Day basic version', qaSamples: '3 basic samples with voice tips', templatesGuides: 'Basic voice tone tips' },
-    { name: 'Pro Kit', price: '₹499', primaryGoal: 'Help candidates feel confident and interview-ready', keyObjective: 'Advanced communication skills development', interviewKit: 'Full 14-Day with detailed explanations', qaSamples: '20+ samples (voice + non-voice + IT support)', templatesGuides: 'Accent practice guide + STAR story templates' },
-    { name: 'Elite Kit', price: '₹1,499', primaryGoal: 'Maximize interview success and build premium brand value', keyObjective: 'Complete professional training experience', interviewKit: 'Everything in Pro Kit', qaSamples: 'Same as Pro Kit', templatesGuides: 'Resume templates + self-intro builder + cultural awareness module' },
-    { name: 'Final Application Plan', price: '₹5,999', primaryGoal: 'Ultimate career transformation with placement support', keyObjective: 'Comprehensive career launch with mentorship', interviewKit: 'Advanced 14-Day Elite Edition', qaSamples: '50+ comprehensive samples', templatesGuides: 'Done-for-you resume + custom scripts + advanced accent training' },
+const TechPlansSection = ({ isLoading = false }) => {
+  const techPlans = [
+    {
+      plan: 'LaunchPad',
+      price: '₹4,999',
+      duration: '2 Weeks',
+      primaryGoal: 'Build foundational IT skills and job readiness',
+      keyObjective: 'Entry-level preparation for tech careers',
+    },
+    {
+      plan: 'Elite',
+      price: '₹8,999',
+      duration: '4 Weeks',
+      primaryGoal: 'Accelerate career growth through advanced upskilling',
+      keyObjective: 'Intermediate level proficiency in DevOps and cloud',
+      isRecommended: true,
+    },
+    {
+      plan: 'Elite Pro',
+      price: '₹14,999',
+      duration: '6 Weeks',
+      primaryGoal: 'Develop leadership and transformation skills',
+      keyObjective: 'Advanced expertise with mentorship',
+    },
   ];
 
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="overflow-x-auto mb-12"
-    >
-      <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 text-center">Complete Comparison Matrix</h2>
-      <table className="min-w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden">
-        <thead className="bg-indigo-600 text-white">
-          <tr>
-            <th className="px-4 py-3 text-left text-sm font-semibold">Plan</th>
-            <th className="px-4 py-3 text-left text-sm font-semibold">Price</th>
-            <th className="px-4 py-3 text-left text-sm font-semibold">Primary Goal</th>
-            <th className="px-4 py-3 text-left text-sm font-semibold">Key Objective</th>
-            <th className="px-4 py-3 text-left text-sm font-semibold">Interview Kit</th>
-            <th className="px-4 py-3 text-left text-sm font-semibold">Q&A Samples</th>
-            <th className="px-4 py-3 text-left text-sm font-semibold">Templates & Guides</th>
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-          {features.map((feature, index) => (
-            <tr key={index} className={index % 2 === 0 ? 'bg-gray-50 dark:bg-gray-700' : ''}>
-              <td className="px-4 py-3 text-sm font-medium">{feature.name}</td>
-              <td className="px-4 py-3 text-sm">{feature.price}</td>
-              <td className="px-4 py-3 text-sm">{feature.primaryGoal}</td>
-              <td className="px-4 py-3 text-sm">{feature.keyObjective}</td>
-              <td className="px-4 py-3 text-sm">{feature.interviewKit}</td>
-              <td className="px-4 py-3 text-sm">{feature.qaSamples}</td>
-              <td className="px-4 py-3 text-sm">{feature.templatesGuides}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </motion.div>
-  );
-};
-
-const SupportMatrix = () => {
-  const supports = [
-    { name: 'Starter Kit', groupAccess: 'WhatsApp group access', mockInterviews: 'None', personalCoaching: 'None', placementSupport: 'None', additionalBenefits: 'Basic community support' },
-    { name: 'Pro Kit', groupAccess: 'WhatsApp group access', mockInterviews: '1 mock interview script', personalCoaching: 'None', placementSupport: 'None', additionalBenefits: 'Advanced preparation materials' },
-    { name: 'Elite Kit', groupAccess: 'WhatsApp voice feedback (optional add-on)', mockInterviews: '3 mock interview scripts + feedback checklist', personalCoaching: 'None', placementSupport: 'None', additionalBenefits: 'Premium content access' },
-    { name: 'Final Application Plan', groupAccess: 'Exclusive alumni community', mockInterviews: 'Live mock with detailed scorecard + improvement plan', personalCoaching: '3 one-on-one Zoom sessions with expert trainers', placementSupport: 'WhatsApp alerts + referral shortlisting', additionalBenefits: 'Lifetime access to resource vault' },
-  ];
+  const numCards = 3;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="overflow-x-auto mb-12"
-    >
-      <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 text-center">Support & Interaction Features</h2>
-      <table className="min-w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden">
-        <thead className="bg-teal-600 text-white">
-          <tr>
-            <th className="px-4 py-3 text-left text-sm font-semibold">Plan</th>
-            <th className="px-4 py-3 text-left text-sm font-semibold">Group Access</th>
-            <th className="px-4 py-3 text-left text-sm font-semibold">Mock Interviews</th>
-            <th className="px-4 py-3 text-left text-sm font-semibold">Personal Coaching</th>
-            <th className="px-4 py-3 text-left text-sm font-semibold">Placement Support</th>
-            <th className="px-4 py-3 text-left text-sm font-semibold">Additional Benefits</th>
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-          {supports.map((support, index) => (
-            <tr key={index} className={index % 2 === 0 ? 'bg-gray-50 dark:bg-gray-700' : ''}>
-              <td className="px-4 py-3 text-sm font-medium">{support.name}</td>
-              <td className="px-4 py-3 text-sm">{support.groupAccess}</td>
-              <td className="px-4 py-3 text-sm">{support.mockInterviews}</td>
-              <td className="px-4 py-3 text-sm">{support.personalCoaching}</td>
-              <td className="px-4 py-3 text-sm">{support.placementSupport}</td>
-              <td className="px-4 py-3 text-sm">{support.additionalBenefits}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </motion.div>
-  );
-};
-
-const ValuePropositionMatrix = () => {
-  const values = [
-    { name: 'Starter Kit', valueProp: 'Low-risk entry point to test effectiveness', whyNeed: 'Your first job shapes your entire career trajectory. For less than a dinner cost, you\'re not buying a course - you\'re buying confidence that your first impression won\'t be your last chance.' },
-    { name: 'Pro Kit', valueProp: 'Comprehensive preparation without premium cost', whyNeed: 'You\'re tired of being nervous in interviews. Every day you delay is another day someone else gets the job you deserve. Stop losing opportunities to candidates who simply prepared better.' },
-    { name: 'Elite Kit', valueProp: 'Professional-grade training with premium features', whyNeed: 'You\'ve invested years in your education. Don\'t let poor interview skills waste that investment. Your parents\' sacrifices deserve more than rejection emails.' },
-    { name: 'Final Application Plan', valueProp: 'Complete career transformation with guaranteed support', whyNeed: 'This isn\'t just about getting any job - it\'s about launching the career that changes your family\'s future. While others keep applying and hoping, you\'ll have mentors and guaranteed support until you succeed.' },
-  ];
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="overflow-x-auto mb-12"
-    >
-      <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 text-center">Value Proposition</h2>
-      <table className="min-w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden">
-        <thead className="bg-green-600 text-white">
-          <tr>
-            <th className="px-4 py-3 text-left text-sm font-semibold">Plan</th>
-            <th className="px-4 py-3 text-left text-sm font-semibold">Value Proposition</th>
-            <th className="px-4 py-3 text-left text-sm font-semibold">Why You Need This Course</th>
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-          {values.map((value, index) => (
-            <tr key={index} className={index % 2 === 0 ? 'bg-gray-50 dark:bg-gray-700' : ''}>
-              <td className="px-4 py-3 text-sm font-medium">{value.name}</td>
-              <td className="px-4 py-3 text-sm">{value.valueProp}</td>
-              <td className="px-4 py-3 text-sm">{value.whyNeed}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </motion.div>
+    <div className="p-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-7xl mx-auto mb-12">
+        {isLoading
+          ? Array.from({ length: numCards }, (_, index) => (
+              <SkeletonCard key={index} />
+            ))
+          : techPlans.map((planData, index) => (
+              <PricingCard
+                key={planData.plan}
+                {...planData}
+                index={index}
+              />
+            ))}
+      </div>
+    </div>
   );
 };
 
 const Pricing = () => {
-  const plans = [
+  const [expandedTech, setExpandedTech] = useState(false);
+  const [expandedComm, setExpandedComm] = useState(false);
+  const [loadingTech, setLoadingTech] = useState(false);
+  const [loadingComm, setLoadingComm] = useState(false);
+
+  const handleToggleTech = () => {
+    if (!expandedTech) {
+      setLoadingTech(true);
+      setTimeout(() => {
+        setLoadingTech(false);
+        setExpandedTech(true);
+      }, 500);
+    } else {
+      setExpandedTech(false);
+    }
+  };
+
+  const handleToggleComm = () => {
+    if (!expandedComm) {
+      setLoadingComm(true);
+      setTimeout(() => {
+        setLoadingComm(false);
+        setExpandedComm(true);
+      }, 500);
+    } else {
+      setExpandedComm(false);
+    }
+  };
+
+  const commPlans = [
     {
       plan: 'Starter Kit',
       price: '₹99',
       primaryGoal: 'Build trust, generate leads, warm up cold traffic',
       keyObjective: 'Basic interview preparation foundation',
-      interviewKit: '14-Day basic version',
-      qaSamples: '3 basic samples with voice tips',
-      templatesGuides: 'Basic voice tone tips',
-      groupAccess: 'WhatsApp group access',
-      mockInterviews: 'None',
-      personalCoaching: 'None',
-      placementSupport: 'None',
-      additionalBenefits: 'Basic community support',
-      valueProp: 'Low-risk entry point to test effectiveness',
-      whyNeed: 'Your first job shapes your entire career trajectory. For less than a dinner cost, you\'re not buying a course - you\'re buying confidence that your first impression won\'t be your last chance.',
     },
     {
       plan: 'Pro Kit',
       price: '₹499',
       primaryGoal: 'Help candidates feel confident and interview-ready',
       keyObjective: 'Advanced communication skills development',
-      interviewKit: 'Full 14-Day with detailed explanations',
-      qaSamples: '20+ samples (voice + non-voice + IT support)',
-      templatesGuides: 'Accent practice guide + STAR story templates',
-      groupAccess: 'WhatsApp group access',
-      mockInterviews: '1 mock interview script',
-      personalCoaching: 'None',
-      placementSupport: 'None',
-      additionalBenefits: 'Advanced preparation materials',
-      valueProp: 'Comprehensive preparation without premium cost',
-      whyNeed: 'You\'re tired of being nervous in interviews. Every day you delay is another day someone else gets the job you deserve. Stop losing opportunities to candidates who simply prepared better.',
     },
     {
       plan: 'Elite Kit',
       price: '₹1,499',
       primaryGoal: 'Maximize interview success and build premium brand value',
       keyObjective: 'Complete professional training experience',
-      interviewKit: 'Everything in Pro Kit',
-      qaSamples: 'Same as Pro Kit',
-      templatesGuides: 'Resume templates + self-intro builder + cultural awareness module',
-      groupAccess: 'WhatsApp voice feedback (optional add-on)',
-      mockInterviews: '3 mock interview scripts + feedback checklist',
-      personalCoaching: 'None',
-      placementSupport: 'None',
-      additionalBenefits: 'Premium content access',
-      valueProp: 'Professional-grade training with premium features',
-      whyNeed: 'You\'ve invested years in your education. Don\'t let poor interview skills waste that investment. Your parents\' sacrifices deserve more than rejection emails.',
       isRecommended: true,
     },
     {
@@ -375,18 +318,10 @@ const Pricing = () => {
       price: '₹5,999',
       primaryGoal: 'Ultimate career transformation with placement support',
       keyObjective: 'Comprehensive career launch with mentorship',
-      interviewKit: 'Advanced 14-Day Elite Edition',
-      qaSamples: '50+ comprehensive samples',
-      templatesGuides: 'Done-for-you resume + custom scripts + advanced accent training',
-      groupAccess: 'Exclusive alumni community',
-      mockInterviews: 'Live mock with detailed scorecard + improvement plan',
-      personalCoaching: '3 one-on-one Zoom sessions with expert trainers',
-      placementSupport: 'WhatsApp alerts + referral shortlisting',
-      additionalBenefits: 'Lifetime access to resource vault',
-      valueProp: 'Complete career transformation with guaranteed support',
-      whyNeed: 'This isn\'t just about getting any job - it\'s about launching the career that changes your family\'s future. While others keep applying and hoping, you\'ll have mentors and guaranteed support until you succeed.',
     },
   ];
+
+  const numCommCards = 4;
 
   return (
     <section className="py-16">
@@ -399,28 +334,113 @@ const Pricing = () => {
           className="text-center mb-12"
         >
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
-            XourceBase Voice & Non-Voice IT Interview Programs
+            Plans & Pricing on XourceBase
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Tailored for IT aspirants to excel in interviews with confidence.
           </p>
         </motion.div>
 
-        {/* Plans Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 max-w-7xl mx-auto mb-12">
-          {plans.map((planData, index) => (
-            <PricingCard
-              key={planData.plan}
-              {...planData}
-              delay={index * 0.1}
-            />
-          ))}
-        </div>
+        {/* Tech Career Accelerator Accordion */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden mb-8"
+        >
+          <div
+            className="flex items-center justify-between p-6 cursor-pointer"
+            onClick={handleToggleTech}
+          >
+            <div className="flex items-center space-x-3">
+              <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-teal-500 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-lg">💻</span>
+              </div>
+              <div>
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white">Tech Career Accelerator</h2>
+                <p className="text-sm text-gray-600 dark:text-gray-300">From learning to leadership — your IT career starts here.</p>
+              </div>
+            </div>
+            <motion.div
+              animate={{ rotate: expandedTech ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <ChevronDown className="w-5 h-5 text-gray-500 dark:text-gray-400" />
+            </motion.div>
+          </div>
+          <AnimatePresence>
+            {(loadingTech || expandedTech) && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.4, ease: 'easeInOut' }}
+                className="overflow-hidden"
+              >
+                <TechPlansSection isLoading={loadingTech} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.section>
 
-        {/* Feature Matrices */}
-        <FeatureMatrix />
-        <SupportMatrix />
-        <ValuePropositionMatrix />
+        {/* Communication & Support Excellence Accordion */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden mb-8"
+        >
+          <div
+            className="flex items-center justify-between p-6 cursor-pointer"
+            onClick={handleToggleComm}
+          >
+            <div className="flex items-center space-x-3">
+              <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-green-500 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-lg">🎙️</span>
+              </div>
+              <div>
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white">Communication & Support Excellence</h2>
+                <p className="text-sm text-gray-600 dark:text-gray-300">From communication to confidence — build your professional voice.</p>
+              </div>
+            </div>
+            <motion.div
+              animate={{ rotate: expandedComm ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <ChevronDown className="w-5 h-5 text-gray-500 dark:text-gray-400" />
+            </motion.div>
+          </div>
+          <AnimatePresence>
+            {(loadingComm || expandedComm) && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.4, ease: 'easeInOut' }}
+                className="overflow-hidden"
+              >
+                <div className="p-6">
+                  {/* Plans Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto mb-12">
+                    {loadingComm
+                      ? Array.from({ length: numCommCards }, (_, index) => (
+                          <SkeletonCard key={index} />
+                        ))
+                      : commPlans.map((planData, index) => (
+                          <PricingCard
+                            key={planData.plan}
+                            {...planData}
+                            index={index}
+                          />
+                        ))}
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.section>
 
         {/* Testimonials */}
         <Testimonials />
