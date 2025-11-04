@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.9c9dbceb.css",
-    "main.js": "/static/js/main.cc774be7.js",
+    "main.css": "/static/css/main.bff30be0.css",
+    "main.js": "/static/js/main.f50b01a1.js",
     "static/media/xourcebase-logo.png": "/static/media/xourcebase-logo.ebe4ef7145bec8ffe3c0.png",
     "index.html": "/index.html",
-    "main.9c9dbceb.css.map": "/static/css/main.9c9dbceb.css.map",
-    "main.cc774be7.js.map": "/static/js/main.cc774be7.js.map"
+    "main.bff30be0.css.map": "/static/css/main.bff30be0.css.map",
+    "main.f50b01a1.js.map": "/static/js/main.f50b01a1.js.map"
   },
   "entrypoints": [
-    "static/css/main.9c9dbceb.css",
-    "static/js/main.cc774be7.js"
+    "static/css/main.bff30be0.css",
+    "static/js/main.f50b01a1.js"
   ]
 }
