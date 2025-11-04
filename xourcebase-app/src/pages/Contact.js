@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, Linkedin, Twitter, Instagram, Youtube, Facebook } from 'lucide-react';
 import emailjs from '@emailjs/browser';
-import ReCAPTCHA from 'react-google-recaptcha'; // For reCAPTCHA v3
-import ReactGA from 'react-ga'; // For Google Analytics
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -11,116 +9,46 @@ const Contact = () => {
     subject: '',
     message: '',
   });
-  const [errors, setErrors] = useState({}); // For form validation errors
   const [isLoading, setIsLoading] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(''); // Success/error messages
-  const [recaptchaToken, setRecaptchaToken] = useState(null); // reCAPTCHA token
+  const [submitStatus, setSubmitStatus] = useState(''); // For success/error messages
 
-  // EmailJS Configuration - Use .env vars
-  const EMAILJS_USER_ID = process.env.REACT_APP_EMAILJS_USER_ID || 'OcbaKlVldik4IJ5I9'; // Fallback for dev
-  const EMAILJS_SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID || 'service_esyebgb'; // Fallback for dev
-  const EMAILJS_TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || 'template_jcb2gaa'; // Fallback for dev
-
-  // reCAPTCHA site key from .env
-  const RECAPTCHA_SITE_KEY = process.env.REACT_APP_RECAPTCHA_SITE_KEY || '6LfVZwIsAAAAAPevLnYnzkLSy3XG45Y2gEa7j2ra'; // Fallback for dev
-
-  // Google Analytics - Initialize with your GA4 Measurement ID from .env
-  useEffect(() => {
-    if (process.env.REACT_APP_GA_TRACKING_ID) {
-      ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_ID);
-      ReactGA.pageview(window.location.pathname + window.location.search);
-    }
-  }, []);
-
-  // reCAPTCHA onChange - Get token
-  const handleRecaptcha = (token) => {
-    setRecaptchaToken(token);
-  };
-
-  const validateForm = () => {
-    const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = 'Name is required.';
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required.';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid.';
-    }
-    if (!formData.subject.trim()) newErrors.subject = 'Subject is required.';
-    if (!formData.message.trim()) newErrors.message = 'Message is required.';
-    if (!recaptchaToken) newErrors.recaptcha = 'Please complete the reCAPTCHA verification.';
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  // EmailJS Configuration - Replace 'YOUR_USER_ID' with your actual User ID from EmailJS dashboard
+  // Find it here: EmailJS Dashboard > Account > Integration > Email Services > Public Key
+  const EMAILJS_USER_ID = process.env.REACT_APP_EMAILJS_USER_ID; // e.g., 'user_abc123def456'
+  const EMAILJS_SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID; // e.g., 'service_esyebgb'
+  const EMAILJS_TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID; // e.g., 'template_jcb2gaa'
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
-    // Clear error on change
-    if (errors[e.target.name]) {
-      setErrors({ ...errors, [e.target.name]: '' });
-    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     setSubmitStatus('');
 
-    // Validate form
-    if (!validateForm()) {
-      setSubmitStatus('error');
+    // Ensure User ID is set (add a check or alert in production)
+    if (EMAILJS_USER_ID === 'YOUR_USER_ID') {
+      setSubmitStatus('Error: Please set your EmailJS User ID in the code.');
+      setIsLoading(false);
       return;
     }
 
-    // Track GA event
-    if (process.env.REACT_APP_GA_TRACKING_ID) {
-      ReactGA.event({
-        category: 'Contact Form',
-        action: 'Submit Attempt',
-      });
-    }
-
-    setIsLoading(true);
-
     try {
-      // Add reCAPTCHA token to form data for server-side verification (if backend)
-      const dataWithRecaptcha = { ...formData, recaptchaToken };
-
       // Send email via EmailJS
-      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, dataWithRecaptcha, EMAILJS_USER_ID);
-      setSubmitStatus('success');
-
-      // Track GA success
-      if (process.env.REACT_APP_GA_TRACKING_ID) {
-        ReactGA.event({
-          category: 'Contact Form',
-          action: 'Submit Success',
-        });
-      }
-
-      // Reset form
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      setRecaptchaToken(null); // Reset reCAPTCHA
-      if (recaptchaRef.current) recaptchaRef.current.reset();
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, formData, EMAILJS_USER_ID);
+      setSubmitStatus('success'); // Success state
+      setFormData({ name: '', email: '', subject: '', message: '' }); // Reset form
     } catch (error) {
       console.error('EmailJS Error:', error);
-      setSubmitStatus('error');
-
-      // Track GA failure
-      if (process.env.REACT_APP_GA_TRACKING_ID) {
-        ReactGA.event({
-          category: 'Contact Form',
-          action: 'Submit Failure',
-        });
-      }
+      setSubmitStatus('error'); // Error state
     } finally {
       setIsLoading(false);
     }
   };
-
-  const recaptchaRef = React.useRef(); // Ref for reCAPTCHA
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-teal-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 transition-colors duration-300">
@@ -136,21 +64,21 @@ const Contact = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start mb-12 sm:mb-16">
           <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6 animate-fade-in">
-            {/* Success/Error Messages */}
+            {/* Success/Error Message */}
             {submitStatus === 'success' && (
               <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-xl" role="alert">
-                🎉 Message sent successfully! We'll get back to you soon.
+                Message sent successfully! We'll get back to you soon.
               </div>
             )}
             {submitStatus === 'error' && (
               <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl" role="alert">
-                ❌ Failed to send message. Please check errors and try again, or contact us directly.
+                Failed to send message. Please try again or contact us directly.
               </div>
             )}
 
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Name *
+                Name
               </label>
               <input
                 type="text"
@@ -160,17 +88,14 @@ const Contact = () => {
                 onChange={handleChange}
                 required
                 disabled={isLoading}
-                className={`w-full px-3 sm:px-4 py-3 rounded-xl border shadow-sm focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:outline-none transition duration-200 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 disabled:opacity-50 ${
-                  errors.name ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
-                }`}
+                className="w-full px-3 sm:px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 shadow-sm dark:shadow-gray-700/50 focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:outline-none transition duration-200 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 disabled:opacity-50"
                 placeholder="Your full name"
               />
-              {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
             </div>
 
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Email *
+                Email
               </label>
               <input
                 type="email"
@@ -180,17 +105,14 @@ const Contact = () => {
                 onChange={handleChange}
                 required
                 disabled={isLoading}
-                className={`w-full px-3 sm:px-8 py-3 rounded-xl border shadow-sm focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:outline-none transition duration-200 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 disabled:opacity-50 ${
-                  errors.email ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
-                }`}
+                className="w-full px-3 sm:px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 shadow-sm dark:shadow-gray-700/50 focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:outline-none transition duration-200 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 disabled:opacity-50"
                 placeholder="your.email@example.com"
               />
-              {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
             </div>
 
             <div>
               <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Subject *
+                Subject
               </label>
               <input
                 type="text"
@@ -200,17 +122,14 @@ const Contact = () => {
                 onChange={handleChange}
                 required
                 disabled={isLoading}
-                className={`w-full px-3 sm:px-4 py-3 rounded-xl border shadow-sm focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:outline-none transition duration-200 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 disabled:opacity-50 ${
-                  errors.subject ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
-                }`}
+                className="w-full px-3 sm:px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 shadow-sm dark:shadow-gray-700/50 focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:outline-none transition duration-200 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 disabled:opacity-50"
                 placeholder="What can we help you with?"
               />
-              {errors.subject && <p className="mt-1 text-sm text-red-600">{errors.subject}</p>}
             </div>
 
             <div>
               <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Message *
+                Message
               </label>
               <textarea
                 id="message"
@@ -220,33 +139,17 @@ const Contact = () => {
                 onChange={handleChange}
                 required
                 disabled={isLoading}
-                className={`w-full px-3 sm:px-4 py-3 rounded-xl border shadow-sm focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:outline-none transition duration-200 resize-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 disabled:opacity-50 ${
-                  errors.message ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
-                }`}
+                className="w-full px-3 sm:px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 shadow-sm dark:shadow-gray-700/50 focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:outline-none transition duration-200 resize-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 disabled:opacity-50"
                 placeholder="Tell us more about your inquiry..."
-              />
-              {errors.message && <p className="mt-1 text-sm text-red-400">{errors.message}</p>}
+              ></textarea>
             </div>
-
-            {/* reCAPTCHA v3 (Invisible - loads automatically) */}
-            {RECAPTCHA_SITE_KEY && (
-              <div className="mt-4">
-                <ReCAPTCHA
-                  ref={recaptchaRef}
-                  sitekey={RECAPTCHA_SITE_KEY}
-                  onChange={handleRecaptcha}
-                  size="invisible" // Invisible mode
-                />
-                {errors.recaptcha && <p className="mt-1 text-sm text-red-600">{errors.recaptcha}</p>}
-              </div>
-            )}
 
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full flex items-center justify-center gap-2 py-3 px-4 text-base font-semibold text-white bg-gradient-to-r from-indigo-600 to-teal-600 dark:from-indigo-700 dark:to-teal-700 rounded-xl shadow-lg hover:shadow-xl hover:from-indigo-700 hover:to-teal-700 dark:hover:from-indigo-800 dark:hover:to-teal-800 transition-all duration-300 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-indigo-200 dark:focus:ring-indigo-800 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full flex items-center justify-center gap-2 py-3 sm:py-4 px-4 sm:px-6 text-base sm:text-lg font-semibold text-white bg-gradient-to-r from-indigo-600 to-teal-600 dark:from-indigo-700 dark:to-teal-700 rounded-xl shadow-lg hover:shadow-xl hover:from-indigo-700 hover:to-teal-700 dark:hover:from-indigo-800 dark:hover:to-teal-800 transform transition-all duration-300 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-indigo-200 dark:focus:ring-indigo-800 disabled:opacity-50 disabled:cursor-not-allowed disabled:scale-100"
             >
-              <Send className="w-4 h-4" />
+              <Send className="w-4 h-4 sm:w-5 sm:h-5" />
               <span>{isLoading ? 'Sending...' : 'Send Message'}</span>
             </button>
           </form>
@@ -271,7 +174,7 @@ const Contact = () => {
                   </a>
                 </div>
                 <div className="flex items-center gap-3">
-                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 dark:text-gray-400" />
+                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 dark:text-gray-500" />
                   <span className="text-gray-700 dark:text-gray-300">Mumbai, Maharashtra, India</span>
                 </div>
               </div>
