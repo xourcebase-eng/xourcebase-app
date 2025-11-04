@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Check, Award, Star, Quote, Clock, Mail, Phone, User, Calendar, MessageCircle, Rocket, Zap, Crown } from 'lucide-react';
+import { ChevronDown, Check, Award, Star, Quote, Clock, Mail, Phone, User, Calendar, MessageCircle, Rocket, Zap, Crown, BadgeCheck, ArrowUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const SkeletonCard = () => (
@@ -28,7 +28,7 @@ const SkeletonCard = () => (
   </motion.div>
 );
 
-const PricingCard = ({ plan, price, primaryGoal, keyObjective, isRecommended = false, duration, icon, index }) => {
+const PricingCard = ({ plan, launchOffer, actualWorth, perfectFor, keyBenefits, price, primaryGoal, keyObjective, interviewKit, qaSamples, templatesGuides, isRecommended = false, icon, index, type = 'tech' }) => {
   return (
     <motion.div
       layout
@@ -36,17 +36,15 @@ const PricingCard = ({ plan, price, primaryGoal, keyObjective, isRecommended = f
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: 'easeOut', delay: index * 0.1 }}
       whileHover={{ y: -5, scale: 1.02 }}
-      className="relative flex flex-col p-6 sm:p-8 rounded-xl shadow-lg dark:shadow-gray-700/50 transition-all duration-300 border-4 group bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 border-gray-200 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-600 h-full"
+      className={`relative flex flex-col p-6 sm:p-8 rounded-xl shadow-lg dark:shadow-gray-700/50 transition-all duration-300 border-2 group bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 ${isRecommended ? 'border-purple-500 ring-2 ring-purple-200 dark:ring-purple-800' : 'border-gray-200 dark:border-gray-700'} h-full`}
     >
       {isRecommended && (
-        <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
-          <span className="bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1 shadow-lg whitespace-nowrap">
-            <Award className="w-3 h-3" />
-            Most Recommended
-          </span>
+        <div className="absolute top-4 right-4 bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center space-x-1">
+          <BadgeCheck className="w-4 h-4" />
+          <span>Recommended</span>
         </div>
       )}
-      <div className="absolute top-4 right-4">
+      <div className="absolute top-4 left-4">
         <span className="bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 px-2 py-1 rounded-full text-xs font-semibold">
           {plan}
         </span>
@@ -57,15 +55,58 @@ const PricingCard = ({ plan, price, primaryGoal, keyObjective, isRecommended = f
         </div>
       )}
       <div className="flex-grow pt-2">
-        <h3 className="text-xl sm:text-2xl font-bold mb-2">{price}</h3>
-        {duration && <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">{duration}</p>}
-        <div className="mb-4 text-sm space-y-1">
-          {primaryGoal && <p className="font-semibold text-indigo-700 dark:text-indigo-300">Primary Goal: {primaryGoal}</p>}
-          {keyObjective && <p className="font-semibold text-indigo-700 dark:text-indigo-300">Key Objective: {keyObjective}</p>}
-        </div>
+        {type === 'tech' ? (
+          <>
+            <h3 className="text-xl sm:text-2xl font-bold mb-2">Launch Offer</h3>
+            <div className="space-y-1 mb-6">
+              <p className="text-4xl font-bold text-indigo-600">{launchOffer}</p>
+              <p className="text-sm text-gray-500 line-through">Actual Worth: {actualWorth}</p>
+            </div>
+            <div className="mb-6">
+              <h4 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">Perfect For</h4>
+              <p className="text-gray-600 dark:text-gray-400">{perfectFor}</p>
+            </div>
+            <ul className="space-y-2 mb-6 text-left">
+              <li className="flex items-center text-gray-600 dark:text-gray-400">
+                <Check className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                {keyBenefits}
+              </li>
+            </ul>
+          </>
+        ) : (
+          <>
+            <h3 className="text-xl sm:text-2xl font-bold mb-2">Launch Offer</h3>
+            <div className="space-y-1 mb-6">
+              <p className="text-4xl font-bold text-indigo-600">{launchOffer}</p>
+              <p className="text-sm text-gray-500 line-through">Actual Worth: {actualWorth}</p>
+            </div>
+            <div className="space-y-4 mb-6">
+              <div>
+                <h4 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-1">Primary Goal</h4>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">{primaryGoal}</p>
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-1">Key Objective</h4>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">{keyObjective}</p>
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-1">Interview Kit</h4>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">{interviewKit}</p>
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-1">Q&A Samples</h4>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">{qaSamples}</p>
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-1">Templates & Guides</h4>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">{templatesGuides}</p>
+              </div>
+            </div>
+          </>
+        )}
       </div>
-      <div className="mt-auto">
-        <Link to="/contact">
+      <div className="mt-auto space-y-3">
+        <Link to="https://forms.cloud.microsoft/r/qjHECcYaSV" target="_blank" rel="noopener noreferrer">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
@@ -76,6 +117,170 @@ const PricingCard = ({ plan, price, primaryGoal, keyObjective, isRecommended = f
         </Link>
       </div>
     </motion.div>
+  );
+};
+
+const SpecialOfferSection = () => (
+  <motion.section
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    className="bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 rounded-xl p-8 text-center mb-16"
+  >
+    <div className="max-w-4xl mx-auto">
+      <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800 dark:text-white flex items-center justify-center space-x-2">
+        <span className="text-2xl">💥</span>
+        <span>Special Early-Bird Offer</span>
+      </h2>
+      <p className="text-xl text-gray-600 dark:text-gray-300 mb-6">
+        🎁 Get ₹500 OFF on any plan — limited to the first 100 enrollments only!
+      </p>
+      <Link
+        to="/contact"
+        className="inline-flex items-center bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-8 py-3 rounded-lg font-semibold hover:from-yellow-600 hover:to-orange-600 transition-all duration-300 space-x-2"
+      >
+        <span>Claim Your Discount</span>
+        <ArrowUp className="w-4 h-4 rotate-45" />
+      </Link>
+    </div>
+  </motion.section>
+);
+
+const ComparisonTable = () => {
+  const comparisonData = [
+    { feature: 'Career Counselling', launchpad: '✅', elite: '✅', elitepro: '✅' },
+    { feature: 'Technical Skill Training', launchpad: '✅', elite: '✅', elitepro: '✅' },
+    { feature: 'Certification Prep', launchpad: '✅', elite: '✅', elitepro: '✅' },
+    { feature: 'Mock Interviews', launchpad: '✅', elite: '✅', elitepro: '✅' },
+    { feature: '1-on-1 Mentorship', launchpad: '❌', elite: '✅', elitepro: '✅' },
+    { feature: 'Placement Assistance', launchpad: 'Basic', elite: '✅', elitepro: 'Priority' },
+    { feature: 'Leadership Coaching', launchpad: '❌', elite: '❌', elitepro: '✅' },
+    { feature: 'Lifetime Alumni Access', launchpad: '❌', elite: '✅', elitepro: '✅' }
+  ];
+
+  return (
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="mb-16"
+    >
+      <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center text-gray-800 dark:text-white">
+        Compare Plans
+      </h2>
+      <div className="overflow-x-auto">
+        <table className="w-full bg-white dark:bg-gray-800 rounded-lg shadow-md">
+          <thead>
+            <tr className="border-b border-gray-200 dark:border-gray-700">
+              <th className="text-left p-4 font-semibold text-gray-700 dark:text-gray-300">Features</th>
+              <th className="p-4 font-semibold text-gray-700 dark:text-gray-300 text-center">LaunchPad</th>
+              <th className="p-4 font-semibold text-gray-700 dark:text-gray-300 text-center">Elite</th>
+              <th className="p-4 font-semibold text-purple-600 dark:text-purple-400 text-center font-bold">Elite Pro</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonData.map((row, index) => (
+              <tr key={index} className="border-b border-gray-100 dark:border-gray-700 last:border-b-0">
+                <td className="p-4 text-gray-600 dark:text-gray-400 font-medium">{row.feature}</td>
+                <td className="p-4 text-center">{row.launchpad}</td>
+                <td className="p-4 text-center">{row.elite}</td>
+                <td className="p-4 text-center font-semibold">{row.elitepro}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </motion.section>
+  );
+};
+
+const CommSupportTable = () => {
+  const supportData = [
+    { plan: 'Starter Kit', groupAccess: 'WhatsApp group access', mockInterviews: 'None', personalCoaching: 'None', placementSupport: 'None', additionalBenefits: 'Basic community support' },
+    { plan: 'Pro Kit', groupAccess: 'WhatsApp group access', mockInterviews: '1 mock interview script', personalCoaching: 'None', placementSupport: 'None', additionalBenefits: 'Advanced preparation materials' },
+    { plan: 'Elite Kit', groupAccess: 'WhatsApp voice feedback (optional add-on)', mockInterviews: '3 mock interview scripts + feedback checklist', personalCoaching: 'None', placementSupport: 'None', additionalBenefits: 'Premium content access' },
+    { plan: 'Final Application Plan', groupAccess: 'Exclusive alumni community', mockInterviews: 'Live mock with detailed scorecard + improvement plan', personalCoaching: '3 one-on-one Zoom sessions with expert trainers', placementSupport: 'WhatsApp alerts + referral shortlisting', additionalBenefits: 'Lifetime access to resource vault' },
+  ];
+
+  return (
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="mb-16"
+    >
+      <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center text-gray-800 dark:text-white">
+        Support & Interaction Features
+      </h2>
+      <div className="overflow-x-auto">
+        <table className="w-full bg-white dark:bg-gray-800 rounded-lg shadow-md">
+          <thead>
+            <tr className="border-b border-gray-200 dark:border-gray-700">
+              <th className="text-left p-4 font-semibold text-gray-700 dark:text-gray-300">Plan</th>
+              <th className="p-4 font-semibold text-gray-700 dark:text-gray-300 text-center">Group Access</th>
+              <th className="p-4 font-semibold text-gray-700 dark:text-gray-300 text-center">Mock Interviews</th>
+              <th className="p-4 font-semibold text-gray-700 dark:text-gray-300 text-center">Personal Coaching</th>
+              <th className="p-4 font-semibold text-gray-700 dark:text-gray-300 text-center">Placement Support</th>
+              <th className="p-4 font-semibold text-gray-700 dark:text-gray-300 text-center">Additional Benefits</th>
+            </tr>
+          </thead>
+          <tbody>
+            {supportData.map((row, index) => (
+              <tr key={index} className="border-b border-gray-100 dark:border-gray-700 last:border-b-0">
+                <td className="p-4 text-gray-600 dark:text-gray-400 font-semibold">{row.plan}</td>
+                <td className="p-4 text-center text-gray-600 dark:text-gray-400">{row.groupAccess}</td>
+                <td className="p-4 text-center text-gray-600 dark:text-gray-400">{row.mockInterviews}</td>
+                <td className="p-4 text-center text-gray-600 dark:text-gray-400">{row.personalCoaching}</td>
+                <td className="p-4 text-center text-gray-600 dark:text-gray-400">{row.placementSupport}</td>
+                <td className="p-4 text-center text-gray-600 dark:text-gray-400">{row.additionalBenefits}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </motion.section>
+  );
+};
+
+const CommValueTable = () => {
+  const valueData = [
+    { plan: 'Starter Kit', valueProp: 'Low-risk entry point to test effectiveness', whyNeed: 'Your first job shapes your entire career trajectory. For less than a dinner cost, you\'re not buying a course - you\'re buying confidence that your first impression won\'t be your last chance.' },
+    { plan: 'Pro Kit', valueProp: 'Comprehensive preparation without premium cost', whyNeed: 'You\'re tired of being nervous in interviews. Every day you delay is another day someone else gets the job you deserve. Stop losing opportunities to candidates who simply prepared better.' },
+    { plan: 'Elite Kit', valueProp: 'Professional-grade training with premium features', whyNeed: 'You\'ve invested years in your education. Don\'t let poor interview skills waste that investment. Your parents\' sacrifices deserve more than rejection emails.' },
+    { plan: 'Final Application Plan', valueProp: 'Complete career transformation with guaranteed support', whyNeed: 'This isn\'t just about getting any job - it\'s about launching the career that changes your family\'s future. While others keep applying and hoping, you\'ll have mentors and guaranteed support until you succeed' },
+  ];
+
+  return (
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="mb-16"
+    >
+      <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center text-gray-800 dark:text-white">
+        Value Proposition
+      </h2>
+      <div className="overflow-x-auto">
+        <table className="w-full bg-white dark:bg-gray-800 rounded-lg shadow-md">
+          <thead>
+            <tr className="border-b border-gray-200 dark:border-gray-700">
+              <th className="text-left p-4 font-semibold text-gray-700 dark:text-gray-300">Plan</th>
+              <th className="p-4 font-semibold text-gray-700 dark:text-gray-300 text-center">Value Proposition</th>
+              <th className="p-4 font-semibold text-gray-700 dark:text-gray-300 text-center">Why You Need This Course</th>
+            </tr>
+          </thead>
+          <tbody>
+            {valueData.map((row, index) => (
+              <tr key={index} className="border-b border-gray-100 dark:border-gray-700 last:border-b-0">
+                <td className="p-4 text-gray-600 dark:text-gray-400 font-semibold">{row.plan}</td>
+                <td className="p-4 text-center text-gray-600 dark:text-gray-400 font-medium">{row.valueProp}</td>
+                <td className="p-4 text-left text-gray-600 dark:text-gray-400 italic">{row.whyNeed}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </motion.section>
   );
 };
 
@@ -154,14 +359,6 @@ const FAQ = () => {
       answer: 'Our programs blend industry-aligned training with personalized mentorship, focusing on real-world skills like mock interviews, resume building, and cultural awareness for IT roles.',
     },
     {
-      question: 'How long do the programs take?',
-      answer: 'Most kits are self-paced over 14 days, with live sessions in premium plans. The Final Application Plan includes 3 Zoom coaching sessions over 4-6 weeks.',
-    },
-    {
-      question: 'Is there a money-back guarantee?',
-      answer: 'Yes, all plans come with a 7-day money-back guarantee. If not satisfied, contact us for a full refund.',
-    },
-    {
       question: 'Do you offer placement assistance?',
       answer: 'Yes, the Final Application Plan includes WhatsApp job alerts and referral shortlisting. All plans provide resume and interview prep for self-placement.',
     },
@@ -219,26 +416,29 @@ const FAQ = () => {
 const TechPlansSection = ({ isLoading = false }) => {
   const techPlans = [
     {
-      plan: 'LaunchPad',
-      price: '₹4,999',
-      duration: '2 Weeks',
-      primaryGoal: 'Build foundational IT skills and job readiness',
-      keyObjective: 'Entry-level preparation for tech careers',
+      plan: '🚀 Starter – LaunchPad',
+      launchOffer: '₹999',
+      actualWorth: '₹1,999',
+      perfectFor: 'Students & Fresh Graduates',
+      keyBenefits: 'Build your foundation, ace interviews, and land your first job with confidence.',
+      type: 'tech'
     },
     {
-      plan: 'Elite',
-      price: '₹8,999',
-      duration: '4 Weeks',
-      primaryGoal: 'Accelerate career growth through advanced upskilling',
-      keyObjective: 'Intermediate level proficiency in DevOps and cloud',
+      plan: '⚡ Advanced – Elite',
+      launchOffer: '₹1,499',
+      actualWorth: '₹3,499',
+      perfectFor: 'Early Professionals (1–3 yrs exp)',
+      keyBenefits: 'Sharpen your skills, boost performance, and fast-track your career growth.',
+      type: 'tech'
+    },
+    {
+      plan: '🏆 Premium – Elite Pro',
+      launchOffer: '₹1,999',
+      actualWorth: '₹4,999',
+      perfectFor: 'Mid–Senior Professionals / Career Switchers',
+      keyBenefits: 'Master leadership, corporate readiness, and future-ready skills for global roles.',
       isRecommended: true,
-    },
-    {
-      plan: 'Elite Pro',
-      price: '₹14,999',
-      duration: '6 Weeks',
-      primaryGoal: 'Develop leadership and transformation skills',
-      keyObjective: 'Advanced expertise with mentorship',
+      type: 'tech'
     },
   ];
 
@@ -246,7 +446,7 @@ const TechPlansSection = ({ isLoading = false }) => {
 
   return (
     <div className="p-6">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-7xl mx-auto mb-12">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         {isLoading
           ? Array.from({ length: numCards }, (_, index) => (
               <SkeletonCard key={index} />
@@ -255,10 +455,11 @@ const TechPlansSection = ({ isLoading = false }) => {
               <PricingCard
                 key={planData.plan}
                 {...planData}
-                index={index}
               />
             ))}
       </div>
+      <ComparisonTable />
+      <SpecialOfferSection />
     </div>
   );
 };
@@ -268,6 +469,10 @@ const Pricing = () => {
   const [expandedComm, setExpandedComm] = useState(false);
   const [loadingTech, setLoadingTech] = useState(false);
   const [loadingComm, setLoadingComm] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleToggleTech = () => {
     if (!expandedTech) {
@@ -296,28 +501,48 @@ const Pricing = () => {
   const commPlans = [
     {
       plan: 'Starter Kit',
-      price: '₹99',
+      launchOffer: '₹99',
+      actualWorth: '₹499',
       primaryGoal: 'Build trust, generate leads, warm up cold traffic',
       keyObjective: 'Basic interview preparation foundation',
+      interviewKit: '14-Day basic version',
+      qaSamples: '3 basic samples with voice tips',
+      templatesGuides: 'Basic voice tone tips',
+      type: 'comm'
     },
     {
       plan: 'Pro Kit',
-      price: '₹499',
+      launchOffer: '₹499',
+      actualWorth: '₹999',
       primaryGoal: 'Help candidates feel confident and interview-ready',
       keyObjective: 'Advanced communication skills development',
+      interviewKit: 'Full 14-Day with detailed explanations',
+      qaSamples: '20+ samples (voice + non voice + IT support)',
+      templatesGuides: 'Accent practice guide + STAR story templates',
+      type: 'comm'
     },
     {
       plan: 'Elite Kit',
-      price: '₹1,499',
+      launchOffer: '₹1,499',
+      actualWorth: '₹2,999',
       primaryGoal: 'Maximize interview success and build premium brand value',
       keyObjective: 'Complete professional training experience',
+      interviewKit: 'Everything in Pro Kit',
+      qaSamples: 'Same as Pro Kit',
+      templatesGuides: 'Resume templates + self-intro builder + cultural awareness module',
       isRecommended: true,
+      type: 'comm'
     },
     {
       plan: 'Final Application Plan',
-      price: '₹5,999',
+      launchOffer: '₹5,999',
+      actualWorth: '₹9,999',
       primaryGoal: 'Ultimate career transformation with placement support',
       keyObjective: 'Comprehensive career launch with mentorship',
+      interviewKit: 'Advanced 14-Day Elite Edition',
+      qaSamples: '50+ comprehensive samples',
+      templatesGuides: 'Done-for-you resume + custom scripts + advanced accent training',
+      type: 'comm'
     },
   ];
 
@@ -337,7 +562,7 @@ const Pricing = () => {
             Plans & Pricing on XourceBase
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Tailored for IT aspirants to excel in interviews with confidence.
+            Tailored for aspiring professionals to excel in interviews with confidence.
           </p>
         </motion.div>
 
@@ -432,10 +657,11 @@ const Pricing = () => {
                           <PricingCard
                             key={planData.plan}
                             {...planData}
-                            index={index}
                           />
                         ))}
                   </div>
+                  <CommSupportTable />
+                  <CommValueTable />
                 </div>
               </motion.div>
             )}

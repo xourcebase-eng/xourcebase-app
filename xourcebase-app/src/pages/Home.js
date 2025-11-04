@@ -103,7 +103,7 @@ const Home = () => {
                 whileHover={{ scale: 1.05 }}
                 className="px-8 py-4 border-2 border-white text-white font-bold rounded-lg hover:bg-white hover:text-indigo-600 transition-all duration-300"
               >
-                <Link to="/contact">Book a Demo Call</Link>
+                <Link to="/contact">Contact Us</Link>
               </motion.button>
             </motion.div>
           </motion.div>
