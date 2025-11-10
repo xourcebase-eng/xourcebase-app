@@ -7,9 +7,9 @@ import { ArrowUp, Cloud, Code, Database, GraduationCap, Zap, ChevronDown, Crown 
 const TechCareerAccelerator = () => {
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [expandedPlans, setExpandedPlans] = useState({
-    launchpad: false,
+    starter: false,
+    pro: false,
     elite: false,
-    elitePro: false,
     master: false
   });
 
@@ -127,9 +127,9 @@ const TechCareerAccelerator = () => {
 
   const plans = [
     {
-      key: 'launchpad',
+      key: 'starter',
       icon: GraduationCap,
-      title: 'XOURCEBASE LAUNCHPAD',
+      title: 'STARTER KIT',
       tagline: 'Foundations & Job Readiness',
       idealFor: '🎓 Students, fresh graduates, early professionals (0–2 years)',
       goal: 'Build strong foundations, gain job-ready confidence, and secure your first role.',
@@ -141,9 +141,9 @@ const TechCareerAccelerator = () => {
       ]
     },
     {
-      key: 'elite',
+      key: 'pro',
       icon: Code,
-      title: 'XOURCEBASE ELITE – CAREER GROWTH & UPSKILLING',
+      title: 'PRO KIT',
       tagline: 'Career Growth & Upskilling',
       idealFor: '💡 Early to mid-level professionals (2–6 years)',
       goal: 'Upskill efficiently, accelerate your career, and transition into high-demand domains.',
@@ -155,9 +155,9 @@ const TechCareerAccelerator = () => {
       ]
     },
     {
-      key: 'elitePro',
+      key: 'elite',
       icon: Zap,
-      title: 'XOURCEBASE ELITE PRO – LEADERSHIP & TRANSFORMATION',
+      title: 'ELITE KIT',
       tagline: 'Leadership & Transformation',
       idealFor: '🏆 Mid–Senior professionals & career switchers (5+ years)',
       goal: 'Transition into leadership or redefine your career with future-ready skills.',
@@ -177,7 +177,7 @@ const TechCareerAccelerator = () => {
       goal: 'Complete end-to-end training, from foundation to leadership, in one journey.',
       duration: '20 Days | 1 Hour per Day (Mon–Fri) or 11 Days | 2 Hours per Day (Sat–Sun)',
       whatYouGet: [
-        { number: '', phase: 'Covers: LaunchPad + Elite + Elite Pro', items: [] },
+        { number: '', phase: 'Covers: Starter Kit + Pro + Elite', items: [] },
         { number: '', phase: 'Includes:', items: ['All features from Plans 1, 2 & 3', 'End-to-end career mentorship', 'Certification, resume, and placement guidance', 'Post-program alumni and recruiter support'] }
       ]
     }

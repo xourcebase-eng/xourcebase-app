@@ -148,14 +148,14 @@ const SpecialOfferSection = () => (
 
 const ComparisonTable = () => {
   const comparisonData = [
-    { feature: 'Career Counselling', launchpad: '✅', elite: '✅', elitepro: '✅' },
-    { feature: 'Technical Skill Training', launchpad: '✅', elite: '✅', elitepro: '✅' },
-    { feature: 'Certification Prep', launchpad: '✅', elite: '✅', elitepro: '✅' },
-    { feature: 'Mock Interviews', launchpad: '✅', elite: '✅', elitepro: '✅' },
-    { feature: '1-on-1 Mentorship', launchpad: '❌', elite: '✅', elitepro: '✅' },
-    { feature: 'Placement Assistance', launchpad: 'Basic', elite: '✅', elitepro: 'Priority' },
-    { feature: 'Leadership Coaching', launchpad: '❌', elite: '❌', elitepro: '✅' },
-    { feature: 'Lifetime Alumni Access', launchpad: '❌', elite: '✅', elitepro: '✅' }
+    { feature: 'Career Counselling', starter: '✅', pro: '✅', elite: '✅' },
+    { feature: 'Technical Skill Training', starter: '✅', pro: '✅', elite: '✅' },
+    { feature: 'Certification Prep', starter: '✅', pro: '✅', elite: '✅' },
+    { feature: 'Mock Interviews', starter: '✅', pro: '✅', elite: '✅' },
+    { feature: '1-on-1 Mentorship', starter: '❌', pro: '✅', elite: '✅' },
+    { feature: 'Placement Assistance', starter: 'Basic', pro: '✅', elite: 'Priority' },
+    { feature: 'Leadership Coaching', starter: '❌', pro: '❌', elite: '✅' },
+    { feature: 'Lifetime Alumni Access', starter: '❌', pro: '✅', elite: '✅' }
   ];
 
   return (
@@ -173,18 +173,18 @@ const ComparisonTable = () => {
           <thead>
             <tr className="border-b border-gray-200 dark:border-gray-700">
               <th className="text-left p-4 font-semibold text-gray-700 dark:text-gray-300">Features</th>
-              <th className="p-4 font-semibold text-gray-700 dark:text-gray-300 text-center">LaunchPad</th>
-              <th className="p-4 font-semibold text-gray-700 dark:text-gray-300 text-center">Elite</th>
-              <th className="p-4 font-semibold text-purple-600 dark:text-purple-400 text-center font-bold">Elite Pro</th>
+              <th className="p-4 font-semibold text-gray-700 dark:text-gray-300 text-center">Starter</th>
+              <th className="p-4 font-semibold text-gray-700 dark:text-gray-300 text-center">Pro</th>
+              <th className="p-4 font-semibold text-purple-600 dark:text-purple-400 text-center font-bold">Elite</th>
             </tr>
           </thead>
           <tbody>
             {comparisonData.map((row, index) => (
               <tr key={index} className="border-b border-gray-100 dark:border-gray-700 last:border-b-0">
                 <td className="p-4 text-gray-600 dark:text-gray-400 font-medium">{row.feature}</td>
-                <td className="p-4 text-center">{row.launchpad}</td>
-                <td className="p-4 text-center">{row.elite}</td>
-                <td className="p-4 text-center font-semibold">{row.elitepro}</td>
+                <td className="p-4 text-center">{row.starter}</td>
+                <td className="p-4 text-center">{row.pro}</td>
+                <td className="p-4 text-center font-semibold">{row.elite}</td>
               </tr>
             ))}
           </tbody>
@@ -416,7 +416,7 @@ const FAQ = () => {
 const TechPlansSection = ({ isLoading = false }) => {
   const techPlans = [
     {
-      plan: '🚀 Starter – LaunchPad',
+      plan: 'Starter Kit',
       launchOffer: '₹999',
       actualWorth: '₹1,999',
       perfectFor: 'Students & Fresh Graduates',
@@ -424,7 +424,7 @@ const TechPlansSection = ({ isLoading = false }) => {
       type: 'tech'
     },
     {
-      plan: '⚡ Advanced – Elite',
+      plan: 'Pro Kit',
       launchOffer: '₹1,499',
       actualWorth: '₹3,499',
       perfectFor: 'Early Professionals (1–3 yrs exp)',
@@ -432,7 +432,7 @@ const TechPlansSection = ({ isLoading = false }) => {
       type: 'tech'
     },
     {
-      plan: '🏆 Premium – Elite Pro',
+      plan: 'Elite Kit',
       launchOffer: '₹1,999',
       actualWorth: '₹4,999',
       perfectFor: 'Mid–Senior Professionals / Career Switchers',

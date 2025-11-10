@@ -38,6 +38,35 @@ const Header = () => {
     document.documentElement.classList.toggle('dark', savedTheme === 'dark');
   }, []);
 
+  // Disable background scroll and signal drawer open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.classList.add('overflow-hidden', 'mobile-drawer-open');
+    } else {
+      document.body.classList.remove('overflow-hidden', 'mobile-drawer-open');
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.classList.remove('overflow-hidden', 'mobile-drawer-open');
+    };
+  }, [isMenuOpen]);
+
+  // Close mobile drawer on resize to desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) { // md breakpoint
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    // Check initial size
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
@@ -149,7 +178,7 @@ const Header = () => {
                 <Link
                   to={item.path}
                   className={`
-                    relative text-base sm:text-lg font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200 pb-1 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2
+                    relative text-sm sm:text-base font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200 pb-1 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2
                     ${isActive(item) ? 'text-indigo-600 dark:text-indigo-400' : ''}
                   `}
                   aria-current={isActive(item) ? 'page' : undefined}
@@ -158,7 +187,7 @@ const Header = () => {
                   <span
                     className={`
                       absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300
-                      ${isActive(item) ? 'w-full' : 'group-hover:w-full'}
+                      ${isActive(item) ? '' : 'group-hover:w-full'}
                     `}
                   />
                 </Link>
@@ -184,7 +213,7 @@ const Header = () => {
                             exit={{ opacity: 0, x: -10 }}
                             transition={{ duration: 0.15, delay: childIndex * 0.05, ease: "easeOut" }}
                             className={`
-                              block px-4 py-2 text-sm font-medium transition-colors duration-200 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-800 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2
+                              block px-4 py-2 text-xs font-medium transition-colors duration-200 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-800 focus:border-2 focus:border-indigo-500
                               ${location.pathname === child.path
                                 ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/50'
                                 : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
@@ -244,7 +273,7 @@ const Header = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2, ease: "easeInOut" }}
+              transition={{ duration: 0.15, ease: "easeInOut" }} // Optimized faster exit for mobile
               className="md:hidden fixed inset-0 bg-black/50 z-40"
               onClick={() => setIsMenuOpen(false)}
               aria-hidden="true"
@@ -255,22 +284,36 @@ const Header = () => {
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
-              transition={{ type: 'spring', stiffness: 300, damping: 30, ease: "easeOut" }}
+              transition={{ 
+                type: 'spring', 
+                stiffness: 400, // Increased stiffness for snappier mobile animation
+                damping: 35, 
+                mass: 0.8, // Reduced mass for quicker response
+                ease: "easeOut" 
+              }}
               drag="x"
               dragConstraints={{ right: 0 }}
-              dragElastic={0.2}
+              dragElastic={0.1} // Reduced elasticity for more controlled drag on mobile
               onDragEnd={handleSwipeEnd}
               style={{ x, opacity }}
-              className="md:hidden fixed top-0 right-0 h-full w-80 bg-white dark:bg-gray-900 z-50 shadow-xl"
+              className="md:hidden fixed top-0 right-0 h-full w-80 bg-white dark:bg-gray-900 z-50 shadow-xl flex flex-col"
               ref={mobileMenuRef}
               role="dialog"
               aria-modal="true"
               aria-labelledby="mobile-menu-heading"
             >
-              <div className="flex justify-end items-center p-4 border-b border-gray-200 dark:border-gray-700">
+              {/* Sticky Header with Logo and Close */}
+              <div className="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700 flex-shrink-0 sticky top-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm z-10">
+                <Link to="/" className="flex items-center group" onClick={() => setIsMenuOpen(false)}>
+                  <img
+                    src={XourceBaseLogo}
+                    alt="XourceBase Logo"
+                    className="w-20 h-auto group-hover:scale-105 transition-transform duration-200"
+                  />
+                </Link>
                 <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
+                  whileHover={{ scale: 1.05 }} // Slightly reduced scale for mobile
+                  whileTap={{ scale: 0.95 }}
                   onClick={() => setIsMenuOpen(false)}
                   className="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   aria-label="Close menu"
@@ -280,7 +323,7 @@ const Header = () => {
               </div>
 
               <nav 
-                className="flex flex-col p-4 space-y-4" 
+                className="flex-1 flex flex-col p-4 space-y-4 overflow-y-auto" 
                 role="menu"
                 aria-labelledby="mobile-menu-heading"
                 id="mobile-menu"
@@ -292,7 +335,7 @@ const Header = () => {
                       to={item.path}
                       onClick={() => setIsMenuOpen(false)}
                       className={`
-                        py-3 px-4 rounded-lg text-base font-medium transition-colors duration-200 block focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2
+                        py-3 px-4 text-sm font-medium transition-colors duration-200 block focus:outline-none focus:border-2 focus:border-indigo-500 focus:border-b-2
                         ${isActive(item) 
                           ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/50' 
                           : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
@@ -315,7 +358,7 @@ const Header = () => {
                             to={child.path}
                             onClick={() => setIsMenuOpen(false)}
                             className={`
-                              block py-2 px-2 text-sm font-medium transition-colors duration-200 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2
+                              block py-2 px-2 text-xs font-medium transition-colors duration-200 focus:outline-none focus:border-2 focus:border-indigo-500 focus:border-b-2
                               ${location.pathname === child.path
                                 ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-100 dark:bg-indigo-900/30'
                                 : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
@@ -338,10 +381,10 @@ const Header = () => {
                     toggleTheme();
                     setIsMenuOpen(false);
                   }}
-                  className="flex items-center space-x-2 py-3 px-4 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="flex items-center space-x-2 py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mt-auto" // Added mt-auto to push to bottom if needed
+                  aria-label="Toggle theme"
                 >
                   {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
-                  <span>Toggle Theme</span>
                 </motion.button>
               </nav>
             </motion.div>
