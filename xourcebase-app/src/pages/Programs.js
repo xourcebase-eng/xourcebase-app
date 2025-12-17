@@ -117,7 +117,7 @@ const Programs = () => {
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-800 text-white py-20 px-4">
+      <section className="relative overflow-hidden bg-gradient-to-br from-red-600 via-purple-600 to-blue-800 text-white py-20 px-4">
         <div className="container mx-auto text-center relative z-10">
           <motion.h1
             initial={{ y: -50, opacity: 0 }}
@@ -157,26 +157,26 @@ const Programs = () => {
               whileHover="hover"
               className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 dark:border-gray-700"
             >
-              <Code className="w-16 h-16 text-indigo-600 mx-auto mb-4" />
+              <Code className="w-16 h-16 text-red-600 mx-auto mb-4" />
               <h3 className="text-2xl font-bold mb-4 text-center text-gray-800 dark:text-white">
                 Tech Career Accelerator
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4 text-center leading-relaxed">
                 For students and professionals aiming to build a career in IT — Cloud, DevOps, or Data. Includes hands-on projects, certification support, and leadership training.
               </p>
-              <p className="text-indigo-600 dark:text-indigo-400 font-semibold text-center mb-6 italic">
+              <p className="text-red-600 dark:text-red-400 font-semibold text-center mb-6 italic">
                 From learning to leadership — your IT career starts here.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   to="/tech-career-accelerator"
-                  className="bg-indigo-600 text-white py-2 px-6 rounded font-semibold hover:bg-indigo-700 transition-colors duration-300 text-center"
+                  className="bg-red-600 text-white py-2 px-6 rounded font-semibold hover:bg-red-700 transition-colors duration-300 text-center"
                 >
                   Explore Program
                 </Link>
                 <Link
                   to="/plans-pricing"
-                  className="border-2 border-indigo-600 text-indigo-600 py-2 px-6 rounded font-semibold hover:bg-indigo-600 hover:text-white transition-colors duration-300 text-center"
+                  className="border-2 border-red-600 text-red-600 py-2 px-6 rounded font-semibold hover:bg-red-600 hover:text-white transition-colors duration-300 text-center"
                 >
                   View Pricing
                 </Link>
@@ -189,26 +189,26 @@ const Programs = () => {
               whileHover="hover"
               className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 dark:border-gray-700"
             >
-              <Mic className="w-16 h-16 text-indigo-600 mx-auto mb-4" />
+              <Mic className="w-16 h-16 text-red-600 mx-auto mb-4" />
               <h3 className="text-2xl font-bold mb-4 text-center text-gray-800 dark:text-white">
                 Communication & Support Excellence
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4 text-center leading-relaxed">
                 For individuals aspiring to excel in BPO, Voice, or Non-Voice careers. Build communication confidence, client handling skills, and professional personality.
               </p>
-              <p className="text-indigo-600 dark:text-indigo-400 font-semibold text-center mb-6 italic">
+              <p className="text-red-600 dark:text-red-400 font-semibold text-center mb-6 italic">
                 From communication to confidence — build your professional voice.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   to="/communication-support-excellence"
-                  className="bg-indigo-600 text-white py-2 px-6 rounded font-semibold hover:bg-indigo-700 transition-colors duration-300 text-center"
+                  className="bg-red-600 text-white py-2 px-6 rounded font-semibold hover:bg-red-700 transition-colors duration-300 text-center"
                 >
                   Explore Program
                 </Link>
                 <Link
                   to="/plans-pricing"
-                  className="border-2 border-indigo-600 text-indigo-600 py-2 px-6 rounded font-semibold hover:bg-indigo-600 hover:text-white transition-colors duration-300 text-center"
+                  className="border-2 border-red-600 text-red-600 py-2 px-6 rounded font-semibold hover:bg-red-600 hover:text-white transition-colors duration-300 text-center"
                 >
                   View Pricing
                 </Link>
@@ -219,7 +219,7 @@ const Programs = () => {
       </motion.div>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-16 px-4">
+      <section className="bg-gradient-to-r from-red-600 to-purple-600 text-white py-16 px-4">
         <div className="container mx-auto text-center">
           <motion.h2
             initial={{ y: 20, opacity: 0 }}
@@ -244,7 +244,7 @@ const Programs = () => {
           >
             <Link
               to="/contact"
-              className="bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-300"
+              className="bg-white text-red-600 px-8 py-3 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-300"
             >
               Book a Demo Call
             </Link>
@@ -258,7 +258,7 @@ const Programs = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 bg-indigo-600 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700 transition-colors duration-300 z-50"
+          className="fixed bottom-6 right-6 bg-red-600 text-white p-3 rounded-full shadow-lg hover:bg-red-700 transition-colors duration-300 z-50"
           aria-label="Back to top"
         >
           <ArrowUp className="w-5 h-5" />

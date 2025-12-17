@@ -232,7 +232,7 @@ const CommunicationSupportExcellence = () => {
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-teal-600 via-green-600 to-emerald-800 text-white py-20 px-4">
+      <section className="relative overflow-hidden bg-gradient-to-br from-orange-600 via-green-600 to-emerald-800 text-white py-20 px-4">
         <div className="container mx-auto text-center relative z-10">
           <motion.h1
             initial={{ y: -50, opacity: 0 }}
@@ -311,7 +311,7 @@ const CommunicationSupportExcellence = () => {
             </div>
           </div>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-4 italic">
-            Reach out: <a href="mailto:contact@xourcebase.com" className="text-teal-600 hover:underline">contact@xourcebase.com</a> | <a href="https://www.xourcebase.com" className="text-teal-600 hover:underline">www.xourcebase.com</a>
+            Reach out: <a href="mailto:contact@xourcebase.com" className="text-orange-600 hover:underline">contact@xourcebase.com</a> | <a href="https://www.xourcebase.com" className="text-orange-600 hover:underline">www.xourcebase.com</a>
           </p>
         </motion.section>
 
@@ -329,7 +329,7 @@ const CommunicationSupportExcellence = () => {
                 transition={{ duration: 0.6, delay: index * 0.1, ease: 'easeOut' }}
                 className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md text-center"
               >
-                <area.icon className="w-12 h-12 text-teal-600 mx-auto mb-4" />
+                <area.icon className="w-12 h-12 text-orange-600 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">{area.title}</h3>
                 <p className="text-gray-600 dark:text-gray-300">{area.description}</p>
               </motion.div>
@@ -357,7 +357,7 @@ const CommunicationSupportExcellence = () => {
                   onClick={() => togglePlan(plan.key)}
                 >
                   <div className="flex items-center space-x-4">
-                    <plan.icon className="w-8 h-8 text-teal-600 flex-shrink-0" />
+                    <plan.icon className="w-8 h-8 text-orange-600 flex-shrink-0" />
                     <div>
                       <h3 className="text-xl font-semibold text-gray-800 dark:text-white">{plan.title}</h3>
                       <p className="text-sm text-gray-600 dark:text-gray-300">{plan.tagline}</p>
@@ -365,7 +365,7 @@ const CommunicationSupportExcellence = () => {
                   </div>
                   <div className="flex items-center space-x-2">
                     <ChevronDown
-                      className={`w-5 h-5 text-teal-600 transition-transform duration-300 ${expandedPlans[plan.key] ? 'rotate-180' : ''}`}
+                      className={`w-5 h-5 text-orange-600 transition-transform duration-300 ${expandedPlans[plan.key] ? 'rotate-180' : ''}`}
                     />
                   </div>
                 </div>
@@ -394,7 +394,7 @@ const CommunicationSupportExcellence = () => {
                         <li>• 30–60 Min per Day (Monday–Friday)</li>
                         <li>• 1–2 Hours per Day (Saturday–Sunday)</li>
                       </ul>
-                      <p className="text-sm font-medium text-teal-600 mt-2">{plan.duration}</p>
+                      <p className="text-sm font-medium text-orange-600 mt-2">{plan.duration}</p>
                     </div>
 
                     {/* What You’ll Get */}
@@ -418,13 +418,13 @@ const CommunicationSupportExcellence = () => {
                     <div className="flex flex-col sm:flex-row gap-4 pt-4 border-t border-gray-200 dark:border-gray-600">
                       <Link
                         to="/plans-pricing"
-                        className="flex-1 bg-teal-600 text-white py-2 px-4 rounded font-semibold text-center hover:bg-teal-700 transition-colors duration-300"
+                        className="flex-1 bg-orange-600 text-white py-2 px-4 rounded font-semibold text-center hover:bg-orange-700 transition-colors duration-300"
                       >
                         View Pricing
                       </Link>
                       <Link
                         to="https://forms.cloud.microsoft/r/qjHECcYaSV" target="_blank" rel="noopener noreferrer"
-                        className="flex-1 border-2 border-teal-600 text-teal-600 py-2 px-4 rounded font-semibold text-center hover:bg-teal-600 hover:text-white transition-colors duration-300"
+                        className="flex-1 border-2 border-orange-600 text-orange-600 py-2 px-4 rounded font-semibold text-center hover:bg-orange-600 hover:text-white transition-colors duration-300"
                       >
                         Book This Program
                       </Link>
@@ -438,7 +438,7 @@ const CommunicationSupportExcellence = () => {
       </motion.div>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-r from-teal-600 to-green-600 text-white py-16 px-4">
+      <section className="bg-gradient-to-r from-orange-600 to-green-600 text-white py-16 px-4">
         <div className="container mx-auto text-center">
           <motion.h2
             initial={{ y: 20, opacity: 0 }}
@@ -464,13 +464,13 @@ const CommunicationSupportExcellence = () => {
           >
             <Link
               to="/plans-pricing"
-              className="bg-white text-teal-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300"
+              className="bg-white text-orange-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300"
             >
               View Pricing
             </Link>
             <Link
               to="/contact"
-              className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-teal-600 transition-colors duration-300"
+              className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-orange-600 transition-colors duration-300"
             >
               Contact Us
             </Link>
@@ -484,7 +484,7 @@ const CommunicationSupportExcellence = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 bg-teal-600 text-white p-3 rounded-full shadow-lg hover:bg-teal-700 transition-colors duration-300 z-50"
+          className="fixed bottom-6 right-6 bg-orange-600 text-white p-3 rounded-full shadow-lg hover:bg-orange-700 transition-colors duration-300 z-50"
           aria-label="Back to top"
         >
           <ArrowUp className="w-5 h-5" />

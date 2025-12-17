@@ -18,7 +18,7 @@ const Home = () => {
       name: 'Ritika S.',
       job: 'DevOps Engineer, Infosys',
       quote: 'After completing the 14-day accelerator, I landed a DevOps Engineer role at Infosys!',
-      image: 'https://via.placeholder.com/60x60?text=RS', // Replace with real images
+      image: 'https://via.placeholder.com/60x60?text=RS',
       rating: 5,
     },
     {
@@ -71,7 +71,7 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* 1. Hero Section */}
-      <section className="relative bg-gradient-to-br from-indigo-600 via-purple-600 to-teal-600 text-white py-20 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-red-600 via-purple-600 to-orange-600 text-white py-20 overflow-hidden">
         <div className="absolute inset-0 bg-black/20" />
         <div className="container mx-auto px-4 relative z-10 text-center">
           <motion.div
@@ -94,14 +94,24 @@ const Home = () => {
               <motion.button
                 variants={staggerChildren}
                 whileHover={{ scale: 1.05 }}
-                className="px-8 py-4 bg-white text-indigo-600 font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                className="px-8 py-4 bg-white text-red-600 font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 <Link to="/programs">View Programs</Link>
               </motion.button>
+
+              {/* New Workshop Button */}
               <motion.button
                 variants={staggerChildren}
                 whileHover={{ scale: 1.05 }}
-                className="px-8 py-4 border-2 border-white text-white font-bold rounded-lg hover:bg-white hover:text-indigo-600 transition-all duration-300"
+                className="px-8 py-4 bg-orange-500 text-white font-bold rounded-lg shadow-lg hover:bg-orange-600 transition-all duration-300"
+              >
+                <Link to="/workshop">Workshops</Link>
+              </motion.button>
+
+              <motion.button
+                variants={staggerChildren}
+                whileHover={{ scale: 1.05 }}
+                className="px-8 py-4 border-2 border-white text-white font-bold rounded-lg hover:bg-white hover:text-red-600 transition-all duration-300"
               >
                 <Link to="/contact">Contact Us</Link>
               </motion.button>
@@ -110,6 +120,7 @@ const Home = () => {
         </div>
       </section>
 
+      {/* The rest of your sections remain unchanged */}
       {/* Programs Overview Section */}
       <section className="py-20 bg-white dark:bg-gray-800">
         <div className="container mx-auto px-4">
@@ -154,11 +165,11 @@ const Home = () => {
             <motion.div
               variants={fadeInUp}
               whileHover={{ scale: 1.02, y: -5 }}
-              className="relative bg-gradient-to-br from-teal-50 to-orange-50 dark:from-gray-700 dark:to-gray-800 p-8 rounded-xl shadow-md dark:shadow-gray-700/50 overflow-hidden"
+              className="relative bg-gradient-to-br from-orange-50 to-orange-50 dark:from-gray-700 dark:to-gray-800 p-8 rounded-xl shadow-md dark:shadow-gray-700/50 overflow-hidden"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-teal-500/5 to-orange-500/5" />
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-orange-500/5" />
               <div className="relative z-10">
-                <Volume2 className="w-16 h-16 text-teal-600 dark:text-teal-400 mx-auto mb-4" />
+                <Volume2 className="w-16 h-16 text-orange-600 dark:text-orange-400 mx-auto mb-4" />
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 text-center">Communication & Support Excellence</h3>
                 <div className="space-y-3 mb-6 text-sm">
                   <div><strong>Ideal For:</strong> Freshers, BPO Aspirants, Communication Roles</div>
@@ -166,7 +177,7 @@ const Home = () => {
                 </div>
                 <Link
                   to="/communication-support-excellence"
-                  className="inline-flex items-center gap-2 w-full justify-center px-6 py-3 bg-gradient-to-r from-teal-500 to-orange-500 text-white font-bold rounded-lg hover:opacity-90 transition-all duration-300"
+                  className="inline-flex items-center gap-2 w-full justify-center px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-500 text-white font-bold rounded-lg hover:opacity-90 transition-all duration-300"
                 >
                   Explore Communication Programs <ChevronRight className="w-4 h-4" />
                 </Link>
@@ -200,7 +211,7 @@ const Home = () => {
                 whileHover={{ y: -5 }}
                 className="text-center p-6 rounded-xl bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-700/50"
               >
-                <highlight.icon className="w-12 h-12 text-indigo-600 dark:text-indigo-400 mx-auto mb-4" />
+                <highlight.icon className="w-12 h-12 text-red-600 dark:text-red-400 mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{highlight.title}</h3>
                 <p className="text-gray-600 dark:text-gray-300">{highlight.desc}</p>
               </motion.div>
@@ -233,7 +244,7 @@ const Home = () => {
                 whileHover={{ y: -5 }}
                 className="text-center p-6 rounded-xl shadow-md dark:shadow-gray-700/50 bg-gray-50 dark:bg-gray-700"
               >
-                <benefit.icon className="w-12 h-12 text-indigo-600 dark:text-indigo-400 mx-auto mb-4" />
+                <benefit.icon className="w-12 h-12 text-red-600 dark:text-red-400 mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{benefit.title}</h3>
                 <p className="text-gray-600 dark:text-gray-300">{benefit.desc}</p>
               </motion.div>
@@ -266,7 +277,7 @@ const Home = () => {
                 whileHover={{ scale: 1.02 }}
                 className="text-center p-6 rounded-xl bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-700/50"
               >
-                <pillar.icon className="w-12 h-12 text-indigo-600 dark:text-indigo-400 mx-auto mb-4" />
+                <pillar.icon className="w-12 h-12 text-red-600 dark:text-red-400 mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{pillar.title}</h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-4">{pillar.desc}</p>
               </motion.div>
@@ -315,7 +326,7 @@ const Home = () => {
       </section>
 
       {/* 5. Call-to-Action Section */}
-      <section className="py-20 bg-gradient-to-br from-indigo-600 to-teal-600 text-white">
+      <section className="py-20 bg-gradient-to-br from-red-600 to-orange-600 text-white">
         <div className="container mx-auto px-4 text-center">
           <motion.div
             initial="hidden"
@@ -331,13 +342,13 @@ const Home = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/plans-pricing"
-                className="px-8 py-4 bg-white text-indigo-600 font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                className="px-8 py-4 bg-white text-red-600 font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 View Plans and Pricing
               </Link>
               <Link
                 to="/contact"
-                className="px-8 py-4 border-2 border-white font-bold rounded-lg hover:bg-white hover:text-indigo-600 transition-all duration-300"
+                className="px-8 py-4 border-2 border-white font-bold rounded-lg hover:bg-white hover:text-red-600 transition-all duration-300"
               >
                 Contact Us
               </Link>

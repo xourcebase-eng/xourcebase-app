@@ -31,7 +31,7 @@ const ScrollButton = () => {
       animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.8 }}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
       onClick={scrollToTop}
-      className="fixed bottom-6 right-6 z-50 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 border border-indigo-200 dark:border-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300 dark:focus:ring-indigo-600"
+      className="fixed bottom-6 right-6 z-50 bg-red-600 hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 border border-red-200 dark:border-red-700 focus:outline-none focus:ring-4 focus:ring-red-300 dark:focus:ring-red-600"
       aria-label="Scroll to top"
     >
       <ArrowUp className="w-5 h-5 sm:w-6 sm:h-6" />

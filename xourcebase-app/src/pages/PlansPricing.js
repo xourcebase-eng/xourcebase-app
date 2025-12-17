@@ -45,12 +45,12 @@ const PricingCard = ({ plan, launchOffer, actualWorth, perfectFor, keyBenefits, 
         </div>
       )}
       <div className="absolute top-4 left-4">
-        <span className="bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 px-2 py-1 rounded-full text-xs font-semibold">
+        <span className="bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 px-2 py-1 rounded-full text-xs font-semibold">
           {plan}
         </span>
       </div>
       {icon && (
-        <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-indigo-500 to-teal-500 rounded-full mx-auto mb-4">
+        <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-red-500 to-orange-500 rounded-full mx-auto mb-4">
           {icon}
         </div>
       )}
@@ -59,7 +59,7 @@ const PricingCard = ({ plan, launchOffer, actualWorth, perfectFor, keyBenefits, 
           <>
             <h3 className="text-xl sm:text-2xl font-bold mb-2">Launch Offer</h3>
             <div className="space-y-1 mb-6">
-              <p className="text-4xl font-bold text-indigo-600">{launchOffer}</p>
+              <p className="text-4xl font-bold text-red-600">{launchOffer}</p>
               <p className="text-sm text-gray-500 line-through">Actual Worth: {actualWorth}</p>
             </div>
             <div className="mb-6">
@@ -77,7 +77,7 @@ const PricingCard = ({ plan, launchOffer, actualWorth, perfectFor, keyBenefits, 
           <>
             <h3 className="text-xl sm:text-2xl font-bold mb-2">Launch Offer</h3>
             <div className="space-y-1 mb-6">
-              <p className="text-4xl font-bold text-indigo-600">{launchOffer}</p>
+              <p className="text-4xl font-bold text-red-600">{launchOffer}</p>
               <p className="text-sm text-gray-500 line-through">Actual Worth: {actualWorth}</p>
             </div>
             <div className="space-y-4 mb-6">
@@ -110,7 +110,7 @@ const PricingCard = ({ plan, launchOffer, actualWorth, perfectFor, keyBenefits, 
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
-            className="w-full py-3 font-semibold rounded-lg shadow-md transition duration-150 bg-indigo-600 text-white hover:bg-indigo-700 dark:bg-indigo-700 dark:hover:bg-indigo-800"
+            className="w-full py-3 font-semibold rounded-lg shadow-md transition duration-150 bg-red-600 text-white hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800"
           >
             Enroll Now
           </motion.button>
@@ -335,10 +335,10 @@ const Testimonials = () => {
                   <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
                 ))}
               </div>
-              <Quote className="w-8 h-8 text-indigo-600 dark:text-indigo-400 mb-4" />
+              <Quote className="w-8 h-8 text-red-600 dark:text-red-400 mb-4" />
               <p className="text-gray-700 dark:text-gray-300 italic mb-4">"{testimonial.quote}"</p>
               <div className="flex items-center">
-                <User className="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 p-2 mr-3" />
+                <User className="w-8 h-8 rounded-full bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-400 p-2 mr-3" />
                 <div>
                   <p className="font-semibold text-gray-900 dark:text-white">{testimonial.name}</p>
                   <p className="text-sm text-gray-500 dark:text-gray-400">{testimonial.plan}</p>
@@ -579,7 +579,7 @@ const Pricing = () => {
             onClick={handleToggleTech}
           >
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-teal-500 rounded-lg flex items-center justify-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-orange-500 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">💻</span>
               </div>
               <div>
@@ -622,7 +622,7 @@ const Pricing = () => {
             onClick={handleToggleComm}
           >
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-green-500 rounded-lg flex items-center justify-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-green-500 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">🎙️</span>
               </div>
               <div>

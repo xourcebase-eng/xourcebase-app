@@ -19,7 +19,7 @@ const About = () => {
   ];
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-teal-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 py-16">
+    <section className="min-h-screen bg-gradient-to-br from-red-50 via-white to-orange-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero Header */}
         <motion.div
@@ -55,7 +55,7 @@ const About = () => {
         >
           <div className="space-y-6">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
-              <BookOpen className="w-8 h-8 text-indigo-600 dark:text-indigo-400" />
+              <BookOpen className="w-8 h-8 text-red-600 dark:text-red-400" />
               Our Mission
             </h2>
             <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
@@ -64,7 +64,7 @@ const About = () => {
           </div>
           <div className="space-y-6">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
-              <Award className="w-8 h-8 text-teal-600 dark:text-teal-400" />
+              <Award className="w-8 h-8 text-orange-600 dark:text-orange-400" />
               Our Vision
             </h2>
             <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
@@ -95,7 +95,7 @@ const About = () => {
                 className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300"
                 whileHover={{ y: -2 }}
               >
-                <value.icon className="w-10 h-10 text-indigo-600 dark:text-indigo-400 mb-4 mx-auto" />
+                <value.icon className="w-10 h-10 text-red-600 dark:text-red-400 mb-4 mx-auto" />
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 text-center">
                   {value.title}
                 </h3>
@@ -131,12 +131,12 @@ const About = () => {
                 <img
                   src={member.avatar}
                   alt={member.name}
-                  className="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-indigo-200 dark:border-indigo-800"
+                  className="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-red-200 dark:border-red-800"
                 />
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-1">
                   {member.name}
                 </h3>
-                <p className="text-indigo-600 dark:text-indigo-400">{member.role}</p>
+                <p className="text-red-600 dark:text-red-400">{member.role}</p>
               </motion.div>
             ))}
           </div>
@@ -155,7 +155,7 @@ const About = () => {
           </p>
           <Link
             to="/programs"
-            className="inline-flex items-center gap-2 px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-indigo-600 to-teal-600 rounded-xl hover:from-indigo-700 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+            className="inline-flex items-center gap-2 px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-red-600 to-orange-600 rounded-xl hover:from-red-700 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl"
           >
             Explore Programs
             <BookOpen className="w-5 h-5" />

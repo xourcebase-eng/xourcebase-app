@@ -25,11 +25,9 @@ const Header = () => {
         { name: 'Communication & Support Excellence', path: '/communication-support-excellence' }
       ]
     },
+    { name: 'Workshops', path: '/workshop' },
     { name: 'Plans & Pricing', path: '/plans-pricing' },
-    { name: 'About', path: '/about' },
     { name: 'Contact', path: '/contact' },
-    { name: 'Careers', path: '/careers' },
-    { name: 'Blog', path: '/blog' },
   ];
 
   useEffect(() => {
@@ -146,7 +144,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-gray-900/80 border-b border-indigo-100/50 dark:border-gray-800/50 shadow-sm transition-all duration-300">
+      <header className="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-gray-900/80 border-b border-red-100/50 dark:border-gray-800/50 shadow-sm transition-all duration-300">
         <div className="container mx-auto px-4 py-3 sm:py-4 flex justify-between items-center">
           <Link to="/" className="flex items-center group">
             <img
@@ -178,15 +176,15 @@ const Header = () => {
                 <Link
                   to={item.path}
                   className={`
-                    relative text-sm sm:text-base font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200 pb-1 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2
-                    ${isActive(item) ? 'text-indigo-600 dark:text-indigo-400' : ''}
+                    relative text-sm sm:text-base font-medium text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors duration-200 pb-1 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2
+                    ${isActive(item) ? 'text-red-600 dark:text-red-400' : ''}
                   `}
                   aria-current={isActive(item) ? 'page' : undefined}
                 >
                   {item.name}
                   <span
                     className={`
-                      absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 dark:bg-indigo-400 transition-all duration-300
+                      absolute bottom-0 left-0 w-0 h-0.5 bg-red-600 dark:bg-red-400 transition-all duration-300
                       ${isActive(item) ? '' : 'group-hover:w-full'}
                     `}
                   />
@@ -213,9 +211,9 @@ const Header = () => {
                             exit={{ opacity: 0, x: -10 }}
                             transition={{ duration: 0.15, delay: childIndex * 0.05, ease: "easeOut" }}
                             className={`
-                              block px-4 py-2 text-xs font-medium transition-colors duration-200 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-800 focus:border-2 focus:border-indigo-500
+                              block px-4 py-2 text-xs font-medium transition-colors duration-200 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-800 focus:border-2 focus:border-red-500
                               ${location.pathname === child.path
-                                ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/50'
+                                ? 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/50'
                                 : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                               }
                               ${activeSubmenuIndex === childIndex ? 'bg-gray-100 dark:bg-gray-800' : ''}
@@ -245,7 +243,7 @@ const Header = () => {
           <div className="flex items-center space-x-2">
             <button
               onClick={toggleTheme}
-              className="hidden md:block p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              className="hidden md:block p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
               aria-label="Toggle theme"
             >
               {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
@@ -254,7 +252,7 @@ const Header = () => {
             <button
               onClick={() => setIsMenuOpen(true)}
               dragControls={controls}
-              className="md:hidden p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              className="md:hidden p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
               aria-label="Toggle menu"
               aria-expanded={isMenuOpen}
             >
@@ -315,7 +313,7 @@ const Header = () => {
                   whileHover={{ scale: 1.05 }} // Slightly reduced scale for mobile
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setIsMenuOpen(false)}
-                  className="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
                   aria-label="Close menu"
                 >
                   <X className="w-6 h-6" />
@@ -335,9 +333,9 @@ const Header = () => {
                       to={item.path}
                       onClick={() => setIsMenuOpen(false)}
                       className={`
-                        py-3 px-4 text-sm font-medium transition-colors duration-200 block focus:outline-none focus:border-2 focus:border-indigo-500 focus:border-b-2
+                        py-3 px-4 text-sm font-medium transition-colors duration-200 block focus:outline-none focus:border-2 focus:border-red-500 focus:border-b-2
                         ${isActive(item) 
-                          ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/50' 
+                          ? 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/50' 
                           : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                         }
                       `}
@@ -349,7 +347,7 @@ const Header = () => {
                     </Link>
                     {item.children && (
                       <div 
-                        className="ml-6 space-y-2 mt-2 border-l-2 border-indigo-200 dark:border-indigo-800 pl-4"
+                        className="ml-6 space-y-2 mt-2 border-l-2 border-red-200 dark:border-red-800 pl-4"
                         role="menu"
                       >
                         {item.children.map((child, childIndex) => (
@@ -358,9 +356,9 @@ const Header = () => {
                             to={child.path}
                             onClick={() => setIsMenuOpen(false)}
                             className={`
-                              block py-2 px-2 text-xs font-medium transition-colors duration-200 focus:outline-none focus:border-2 focus:border-indigo-500 focus:border-b-2
+                              block py-2 px-2 text-xs font-medium transition-colors duration-200 focus:outline-none focus:border-2 focus:border-red-500 focus:border-b-2
                               ${location.pathname === child.path
-                                ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-100 dark:bg-indigo-900/30'
+                                ? 'text-red-600 dark:text-red-400 bg-red-100 dark:bg-red-900/30'
                                 : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
                               }
                             `}
@@ -381,7 +379,7 @@ const Header = () => {
                     toggleTheme();
                     setIsMenuOpen(false);
                   }}
-                  className="flex items-center space-x-2 py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mt-auto" // Added mt-auto to push to bottom if needed
+                  className="flex items-center space-x-2 py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 mt-auto" // Added mt-auto to push to bottom if needed
                   aria-label="Toggle theme"
                 >
                   {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}

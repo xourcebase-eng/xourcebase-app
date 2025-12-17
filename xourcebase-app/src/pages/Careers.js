@@ -8,7 +8,7 @@ const Careers = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-teal-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 flex items-center justify-center py-16 px-4"
+      className="min-h-screen bg-gradient-to-br from-red-50 via-white to-orange-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 flex items-center justify-center py-16 px-4"
     >
       <div className="text-center max-w-md mx-auto">
         {/* Title */}
@@ -19,7 +19,7 @@ const Careers = () => {
           className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4 flex justify-center items-center gap-3 mx-auto"
         >
           Careers at XourceBase
-          <Briefcase className="w-8 h-8 md:w-12 md:h-12 text-indigo-600 dark:text-indigo-400 animate-bounce" />
+          <Briefcase className="w-8 h-8 md:w-12 md:h-12 text-red-600 dark:text-red-400 animate-bounce" />
         </motion.h1>
 
         {/* Message */}
@@ -48,9 +48,9 @@ const Careers = () => {
           transition={{ duration: 0.6, delay: 0.6, type: 'spring', stiffness: 200 }}
           className="flex justify-center items-center gap-4 mb-8"
         >
-          <Users className="w-12 h-12 md:w-16 md:h-16 text-indigo-600 dark:text-indigo-400" />
+          <Users className="w-12 h-12 md:w-16 md:h-16 text-red-600 dark:text-red-400" />
           <div className="w-px h-12 bg-gray-300 dark:bg-gray-600"></div>
-          <Users className="w-12 h-12 md:w-16 md:h-16 text-teal-600 dark:text-teal-400" />
+          <Users className="w-12 h-12 md:w-16 md:h-16 text-orange-600 dark:text-orange-400" />
         </motion.div>
       </div>
     </motion.section>

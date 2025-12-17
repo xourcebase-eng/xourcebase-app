@@ -18,7 +18,7 @@ const Blog = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4, ease: 'easeOut' }}
-      className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-teal-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 py-16 px-4"
+      className="min-h-screen bg-gradient-to-br from-red-50 via-white to-orange-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 py-16 px-4"
     >
       <div className="container mx-auto">
         {/* Header */}
@@ -30,7 +30,7 @@ const Blog = () => {
         >
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4 flex justify-center items-center gap-3">
             XourceBase Blog
-            <Newspaper className="w-8 h-8 md:w-12 md:h-12 text-indigo-600 dark:text-indigo-400" />
+            <Newspaper className="w-8 h-8 md:w-12 md:h-12 text-red-600 dark:text-red-400" />
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Stay tuned for the latest updates, tips, and stories from our team.

@@ -31,7 +31,7 @@ const Sitemap = () => {
   };
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-teal-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 py-16">
+    <section className="min-h-screen bg-gradient-to-br from-red-50 via-white to-orange-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial="hidden"
@@ -41,7 +41,7 @@ const Sitemap = () => {
           className="max-w-4xl mx-auto text-center mb-12"
         >
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <BookOpen className="w-8 h-8 text-indigo-600 dark:text-indigo-400" />
+            <BookOpen className="w-8 h-8 text-red-600 dark:text-red-400" />
             <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">XourceBase</h1>
           </div>
           <p className="text-lg text-gray-600 dark:text-gray-300">Your Cloud & DevOps Learning Hub</p>
@@ -62,7 +62,7 @@ const Sitemap = () => {
                 <li key={item.name}>
                   <Link
                     to={item.path}
-                    className="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200 block"
+                    className="text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors duration-200 block"
                   >
                     {item.name}
                   </Link>
@@ -79,7 +79,7 @@ const Sitemap = () => {
                 <li key={item.name}>
                   <Link
                     to={item.path}
-                    className="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200 block"
+                    className="text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors duration-200 block"
                   >
                     {item.name}
                   </Link>
@@ -96,7 +96,7 @@ const Sitemap = () => {
                 <li key={item.name}>
                   <Link
                     to={item.path}
-                    className="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200 block"
+                    className="text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors duration-200 block"
                   >
                     {item.name}
                   </Link>

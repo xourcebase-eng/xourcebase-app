@@ -58,7 +58,7 @@ const HelpSupport = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4, ease: 'easeOut' }}
-      className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-teal-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 py-16 px-4"
+      className="min-h-screen bg-gradient-to-br from-red-50 via-white to-orange-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 py-16 px-4"
     >
       <div className="container mx-auto">
         {/* Header */}
@@ -98,7 +98,7 @@ const HelpSupport = () => {
                 className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 text-center"
                 whileHover={{ y: -4 }}
               >
-                <card.icon className="w-12 h-12 text-indigo-600 dark:text-indigo-400 mx-auto mb-4" />
+                <card.icon className="w-12 h-12 text-red-600 dark:text-red-400 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                   {card.title}
                 </h3>
@@ -107,7 +107,7 @@ const HelpSupport = () => {
                 </p>
                 <Link
                   to={card.path}
-                  className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900 rounded-lg hover:bg-indigo-100 dark:hover:bg-indigo-800 transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900 rounded-lg hover:bg-red-100 dark:hover:bg-red-800 transition-colors"
                 >
                   {card.action} →
                 </Link>
@@ -185,7 +185,7 @@ const HelpSupport = () => {
           </h3>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-indigo-600 to-teal-600 rounded-xl hover:from-indigo-700 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+            className="inline-flex items-center gap-2 px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-red-600 to-orange-600 rounded-xl hover:from-red-700 hover:to-orange-700 transition-all duration-300 shadow-lg hover:shadow-xl"
           >
             <MessageCircle className="w-5 h-5" />
             Contact Us

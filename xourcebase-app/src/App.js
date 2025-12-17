@@ -18,6 +18,8 @@ import TeachOnXourceBase from './pages/TeachOnXourceBase';
 import TechCareerAccelerator from './pages/TechCareerAccelerator';
 import CommunicationSupportExcellence from './pages/CommunicationSupportExcellence';
 import Programs from './pages/Programs';
+import Workshop from './pages/WorkshopPage';
+import WorkshopCheckout from './pages/WorkshopCheckoutPage';
 
 const App = () => {
   return (
@@ -41,6 +43,8 @@ const App = () => {
             <Route path="/tech-career-accelerator" element={<TechCareerAccelerator />} />
             <Route path="/communication-support-excellence" element={<CommunicationSupportExcellence />} />
             <Route path="/programs" element={<Programs />} />
+            <Route path="/workshop" element={<Workshop />} />
+            <Route path="/workshop-checkout" element={<WorkshopCheckout />} />
           </Routes>
         </main>
         <Footer />

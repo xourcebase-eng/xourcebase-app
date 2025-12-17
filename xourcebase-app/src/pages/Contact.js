@@ -51,7 +51,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-teal-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 transition-colors duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-orange-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 transition-colors duration-300">
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16">
         <div className="text-center mb-8 sm:mb-12 animate-fade-in">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 dark:text-white leading-tight mb-4 flex justify-center items-center gap-3">
@@ -88,7 +88,7 @@ const Contact = () => {
                 onChange={handleChange}
                 required
                 disabled={isLoading}
-                className="w-full px-3 sm:px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 shadow-sm dark:shadow-gray-700/50 focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:outline-none transition duration-200 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 disabled:opacity-50"
+                className="w-full px-3 sm:px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 shadow-sm dark:shadow-gray-700/50 focus:border-red-500 dark:focus:border-red-400 focus:ring-red-500 dark:focus:ring-red-400 focus:outline-none transition duration-200 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 disabled:opacity-50"
                 placeholder="Your full name"
               />
             </div>
@@ -105,7 +105,7 @@ const Contact = () => {
                 onChange={handleChange}
                 required
                 disabled={isLoading}
-                className="w-full px-3 sm:px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 shadow-sm dark:shadow-gray-700/50 focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:outline-none transition duration-200 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 disabled:opacity-50"
+                className="w-full px-3 sm:px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 shadow-sm dark:shadow-gray-700/50 focus:border-red-500 dark:focus:border-red-400 focus:ring-red-500 dark:focus:ring-red-400 focus:outline-none transition duration-200 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 disabled:opacity-50"
                 placeholder="your.email@example.com"
               />
             </div>
@@ -122,7 +122,7 @@ const Contact = () => {
                 onChange={handleChange}
                 required
                 disabled={isLoading}
-                className="w-full px-3 sm:px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 shadow-sm dark:shadow-gray-700/50 focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:outline-none transition duration-200 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 disabled:opacity-50"
+                className="w-full px-3 sm:px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 shadow-sm dark:shadow-gray-700/50 focus:border-red-500 dark:focus:border-red-400 focus:ring-red-500 dark:focus:ring-red-400 focus:outline-none transition duration-200 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 disabled:opacity-50"
                 placeholder="What can we help you with?"
               />
             </div>
@@ -139,7 +139,7 @@ const Contact = () => {
                 onChange={handleChange}
                 required
                 disabled={isLoading}
-                className="w-full px-3 sm:px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 shadow-sm dark:shadow-gray-700/50 focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:outline-none transition duration-200 resize-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 disabled:opacity-50"
+                className="w-full px-3 sm:px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 shadow-sm dark:shadow-gray-700/50 focus:border-red-500 dark:focus:border-red-400 focus:ring-red-500 dark:focus:ring-red-400 focus:outline-none transition duration-200 resize-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 disabled:opacity-50"
                 placeholder="Tell us more about your inquiry..."
               ></textarea>
             </div>
@@ -147,7 +147,7 @@ const Contact = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full flex items-center justify-center gap-2 py-3 sm:py-4 px-4 sm:px-6 text-base sm:text-lg font-semibold text-white bg-gradient-to-r from-indigo-600 to-teal-600 dark:from-indigo-700 dark:to-teal-700 rounded-xl shadow-lg hover:shadow-xl hover:from-indigo-700 hover:to-teal-700 dark:hover:from-indigo-800 dark:hover:to-teal-800 transform transition-all duration-300 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-indigo-200 dark:focus:ring-indigo-800 disabled:opacity-50 disabled:cursor-not-allowed disabled:scale-100"
+              className="w-full flex items-center justify-center gap-2 py-3 sm:py-4 px-4 sm:px-6 text-base sm:text-lg font-semibold text-white bg-gradient-to-r from-red-600 to-orange-600 dark:from-red-700 dark:to-orange-700 rounded-xl shadow-lg hover:shadow-xl hover:from-red-700 hover:to-orange-700 dark:hover:from-red-800 dark:hover:to-orange-800 transform transition-all duration-300 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-red-200 dark:focus:ring-red-800 disabled:opacity-50 disabled:cursor-not-allowed disabled:scale-100"
             >
               <Send className="w-4 h-4 sm:w-5 sm:h-5" />
               <span>{isLoading ? 'Sending...' : 'Send Message'}</span>
@@ -157,19 +157,19 @@ const Contact = () => {
           <div className="space-y-6 sm:space-y-8 animate-fade-in delay-200">
             <div className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-2xl shadow-lg dark:shadow-gray-700/50">
               <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4 flex items-center gap-2">
-                <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 dark:text-indigo-400" />
+                <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-red-600 dark:text-red-400" />
                 Reach Out Directly
               </h3>
               <div className="space-y-3 sm:space-y-4 text-sm sm:text-base">
                 <div className="flex items-center gap-3">
                   <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 dark:text-gray-500" />
-                  <a href="mailto:contact@xourcebase.com" className="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition">
+                  <a href="mailto:contact@xourcebase.com" className="text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition">
                     contact@xourcebase.com
                   </a>
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 dark:text-gray-500" />
-                  <a href="tel:+91 8767765307" className="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition">
+                  <a href="tel:+91 8767765307" className="text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition">
                     +91 8767765307
                   </a>
                 </div>
@@ -184,7 +184,7 @@ const Contact = () => {
               <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">Follow Us</h3>
               <div className="flex justify-center space-x-3 sm:space-x-4">
                 {[
-                  { icon: Linkedin, url: 'https://www.linkedin.com/company/xourcebase', color: 'text-indigo-600 dark:text-indigo-400' },
+                  { icon: Linkedin, url: 'https://www.linkedin.com/company/xourcebase', color: 'text-red-600 dark:text-red-400' },
                   { icon: Twitter, url: 'https://x.com/XourceBase', color: 'text-sky-500 dark:text-sky-400' },
                   { icon: Instagram, url: 'https://www.instagram.com/xourcebase/', color: 'text-pink-500 dark:text-pink-400' },
                   { icon: Youtube, url: 'https://www.youtube.com/@XourceBase', color: 'text-red-600 dark:text-red-400' },
@@ -195,7 +195,7 @@ const Contact = () => {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`p-2 sm:p-3 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-indigo-100 dark:hover:bg-indigo-900 transition duration-200 ${social.color} hover:scale-110`}
+                    className={`p-2 sm:p-3 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-red-100 dark:hover:bg-red-900 transition duration-200 ${social.color} hover:scale-110`}
                     aria-label={`Follow on ${social.icon.name}`}
                   >
                     <social.icon className="w-4 h-4 sm:w-5 sm:h-5" />
