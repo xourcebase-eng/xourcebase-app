@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { BookOpen, Linkedin, Twitter, Instagram, Youtube, Facebook } from 'lucide-react';
+import { Linkedin, Twitter, Instagram, Youtube, Facebook } from 'lucide-react';
 import XourceBaseLogo from '../assets/xourcebase-logo.png'; // Adjust path as needed
 
 const Footer = () => {
@@ -21,6 +21,9 @@ const Footer = () => {
       { name: 'Teach on XourceBase', path: '/teach-on-xourcebase' },
       { name: 'Plans and Pricing', path: '/plans-pricing' },
       { name: 'Help and Support', path: '/help' },
+    ],
+    business: [
+      { name: 'XourceBase for Business', path: '/business' },
     ],
     legal: [
       { name: 'Privacy Policy', path: '/privacy-policy' },
@@ -46,7 +49,8 @@ const Footer = () => {
       className="bg-[#1c1d1f] text-gray-300 border-t border-gray-700"
     >
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        {/* Main Columns - Now 5 columns */}
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8">
           {/* Section 1: About */}
           <motion.div variants={fadeInUp} className="space-y-4">
             <h4 className="text-white font-semibold text-lg">About</h4>
@@ -81,7 +85,24 @@ const Footer = () => {
             </ul>
           </motion.div>
 
-          {/* Section 3: Legal & Accessibility */}
+          {/* Section 3: XourceBase for Business (NEW) */}
+          <motion.div variants={fadeInUp} className="space-y-4">
+            <h4 className="text-white font-semibold text-lg">XourceBase for Business</h4>
+            <ul className="space-y-2 text-sm">
+              {links.business.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    to={item.path}
+                    className="hover:text-white transition-colors duration-200 block"
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Section 4: Legal & Accessibility */}
           <motion.div variants={fadeInUp} className="space-y-4">
             <h4 className="text-white font-semibold text-lg">Legal & Accessibility</h4>
             <ul className="space-y-2 text-sm">
@@ -98,7 +119,7 @@ const Footer = () => {
             </ul>
           </motion.div>
 
-          {/* Section 4: Social Media */}
+          {/* Section 5: Follow Us (kept in original position) */}
           <motion.div variants={fadeInUp} className="space-y-4">
             <h4 className="text-white font-semibold text-lg">Follow Us</h4>
             <div className="flex space-x-4">
@@ -121,7 +142,7 @@ const Footer = () => {
           </motion.div>
         </div>
 
-        {/* Bottom Bar */}
+        {/* Bottom Bar - Only logo and copyright */}
         <div className="border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center text-sm">
           <div className="flex items-center space-x-2 mb-4 md:mb-0">
             <Link to="/" className="flex items-center group">

@@ -243,9 +243,11 @@ const WorkshopLandingPage = () => {
               Offer Ends In: <span className="text-yellow-300 font-bold text-2xl ml-2">{formatTime(timeLeft)}</span>
             </p>
           </div>
-          <button className="bg-white text-red-600 hover:bg-gray-100 font-extrabold text-xl py-4 px-12 rounded-xl shadow-xl transform hover:scale-105 transition">
-            SECURE YOUR SPOT NOW
-          </button>
+          <Link to="/workshop-checkout">
+            <button className="bg-white text-red-600 hover:bg-gray-100 font-extrabold text-xl py-4 px-12 rounded-xl shadow-xl transform hover:scale-105 transition">
+              SECURE YOUR SPOT NOW
+            </button>
+          </Link>
         </div>
       </div>
     </div>

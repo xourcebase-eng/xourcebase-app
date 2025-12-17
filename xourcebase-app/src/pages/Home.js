@@ -1,363 +1,607 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { Users, Mic, FileText, Brain, Map, Clock, Star, ChevronRight, Code, Volume2, Award, GraduationCap, Briefcase, Grid } from 'lucide-react';
+import { Rocket, Zap, Users, Award, ArrowRight, BookOpen, Cloud, FileText, Brain, Clock, Star, Map, Mic, MessageSquare, ArrowLeft } from 'lucide-react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
-const Home = () => {
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+// Flip Card Component
+function FlipCard({ icon: Icon, title, desc, gradient = "from-red-900 to-red-700" }) {
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  useEffect(() => {
+    let timer;
+    
+    // Only set auto-flip timer on mobile when card is flipped
+    if (isFlipped && window.innerWidth < 768) {
+      timer = setTimeout(() => {
+        setIsFlipped(false);
+      }, 10000); // 10 seconds
+    }
+
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
+  }, [isFlipped]);
+
+  const handleInteraction = () => {
+    setIsFlipped(!isFlipped);
   };
-
-  const staggerChildren = {
-    visible: { transition: { staggerChildren: 0.1 } }
-  };
-
-  const testimonials = [
-    {
-      name: 'Ritika S.',
-      job: 'DevOps Engineer, Infosys',
-      quote: 'After completing the 14-day accelerator, I landed a DevOps Engineer role at Infosys!',
-      image: 'https://via.placeholder.com/60x60?text=RS',
-      rating: 5,
-    },
-    {
-      name: 'Amit K.',
-      job: 'Cloud Architect, AWS',
-      quote: 'The mentorship and mock interviews transformed my interview skills—got promoted within months!',
-      image: 'https://via.placeholder.com/60x60?text=AK',
-      rating: 5,
-    },
-    {
-      name: 'Sneha R.',
-      job: 'Full-Stack Developer, TCS',
-      quote: 'From zero confidence to acing technical rounds. XourceBase made it possible!',
-      image: 'https://via.placeholder.com/60x60?text=SR',
-      rating: 5,
-    },
-    {
-      name: 'Raj P.',
-      job: 'Site Reliability Engineer, Google',
-      quote: 'The resume optimization and behavioral training were key to my success.',
-      image: 'https://via.placeholder.com/60x60?text=RP',
-      rating: 5,
-    },
-  ];
-
-  const pillars = [
-    { icon: Mic, title: 'Mock Interviews', desc: 'Real-time practice with expert feedback to simulate high-stakes scenarios.' },
-    { icon: Brain, title: 'Technical Assessments', desc: 'Hands-on coding challenges and quizzes tailored to top IT companies.' },
-    { icon: Users, title: 'Communication Mastery', desc: 'Voice modulation, storytelling, and STAR method for impactful responses.' },
-    { icon: FileText, title: 'Resume & Portfolio Review', desc: 'Personalized critiques to make your profile ATS-friendly and compelling.' },
-    { icon: Clock, title: 'Confidence Coaching', desc: 'Mindset sessions to overcome anxiety and build lasting interview poise.' },
-  ];
-
-  const benefits = [
-    { icon: Users, title: 'Real Interview Simulations', desc: 'Live mocks mirroring actual company interviews.' },
-    { icon: Brain, title: 'One-on-One Mentorship', desc: 'Dedicated guidance from industry veterans.' },
-    { icon: FileText, title: 'Resume & LinkedIn Optimization', desc: 'Craft profiles that get noticed by recruiters.' },
-    { icon: Map, title: 'Technical & Behavioral Training', desc: 'Balanced prep for every interview stage.' },
-    { icon: Clock, title: 'Cloud & DevOps Career Roadmaps', desc: 'Personalized paths to your target role.' },
-    { icon: Star, title: 'Lifetime Community Access', desc: 'Ongoing support from alumni and experts.' },
-  ];
-
-  const whyChooseUs = [
-    { icon: GraduationCap, title: 'Industry Mentors', desc: 'Guidance from top professionals in tech and communication.' },
-    { icon: Briefcase, title: 'Practical Learning', desc: 'Hands-on projects and real-world simulations.' },
-    { icon: Award, title: 'Career Support', desc: 'Job placement assistance and interview prep.' },
-    { icon: Users, title: 'Certification Guidance', desc: 'Expert help to ace industry certifications.' },
-  ];
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      {/* 1. Hero Section */}
-      <section className="relative bg-gradient-to-br from-red-600 via-purple-600 to-orange-600 text-white py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-black/20" />
-        <div className="container mx-auto px-4 relative z-10 text-center">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="max-w-4xl mx-auto"
-          >
-            <motion.h1 variants={fadeInUp} className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6">
-              Accelerate Your Career — Choose Your Growth Path
-            </motion.h1>
-            <motion.p variants={fadeInUp} className="text-xl sm:text-2xl mb-8 max-w-3xl mx-auto">
-              XourceBase empowers students, professionals, and freshers with tailored programs in tech and communication to unlock your potential and land dream roles.
-            </motion.p>
-            <motion.div
-              variants={staggerChildren}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-            >
-              <motion.button
-                variants={staggerChildren}
-                whileHover={{ scale: 1.05 }}
-                className="px-8 py-4 bg-white text-red-600 font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <Link to="/programs">View Programs</Link>
-              </motion.button>
-
-              {/* New Workshop Button */}
-              <motion.button
-                variants={staggerChildren}
-                whileHover={{ scale: 1.05 }}
-                className="px-8 py-4 bg-orange-500 text-white font-bold rounded-lg shadow-lg hover:bg-orange-600 transition-all duration-300"
-              >
-                <Link to="/workshop">Workshops</Link>
-              </motion.button>
-
-              <motion.button
-                variants={staggerChildren}
-                whileHover={{ scale: 1.05 }}
-                className="px-8 py-4 border-2 border-white text-white font-bold rounded-lg hover:bg-white hover:text-red-600 transition-all duration-300"
-              >
-                <Link to="/contact">Contact Us</Link>
-              </motion.button>
-            </motion.div>
-          </motion.div>
+    <motion.div
+      className="h-80 [perspective:1200px] group"
+      whileHover={{ scale: 1.05 }}
+      transition={{ duration: 0.4 }}
+      onMouseEnter={() => {
+        if (window.innerWidth >= 768) {
+          setIsFlipped(true);
+        }
+      }}
+      onMouseLeave={() => {
+        if (window.innerWidth >= 768) {
+          setIsFlipped(false);
+        }
+      }}
+    >
+      <div
+        className={`relative w-full h-full cursor-pointer transition-all duration-700 ease-out [transform-style:preserve-3d]
+                  ${isFlipped ? '[transform:rotateY(180deg)]' : ''}`}
+        onClick={handleInteraction}
+      >
+        {/* Front Side */}
+        <div className="absolute inset-0 [backface-visibility:hidden] bg-white rounded-2xl shadow-lg flex flex-col items-center justify-center text-center border border-gray-100 p-8">
+          <Icon className="w-16 h-16 text-[#8B0000] mb-6" />
+          <h3 className="text-xl font-bold text-gray-900">{title}</h3>
+          <p className="mt-4 text-sm text-gray-500">Tap or hover for details</p>
         </div>
-      </section>
 
-      {/* The rest of your sections remain unchanged */}
-      {/* Programs Overview Section */}
-      <section className="py-20 bg-white dark:bg-gray-800">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">Choose Your Program Track</h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300">Tailored paths for tech innovation and communication mastery.</p>
-          </motion.div>
-          <motion.div
-            variants={staggerChildren}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12"
-          >
-            {/* Tech Track Overview Card */}
-            <motion.div
-              variants={fadeInUp}
-              whileHover={{ scale: 1.02, y: -5 }}
-              className="relative bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-700 dark:to-gray-800 p-8 rounded-xl shadow-md dark:shadow-gray-700/50 overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-600/5" />
-              <div className="relative z-10">
-                <Code className="w-16 h-16 text-blue-600 dark:text-blue-400 mx-auto mb-4" />
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 text-center">Tech Career Accelerator</h3>
-                <div className="space-y-3 mb-6 text-sm">
-                  <div><strong>Ideal For:</strong> Students, Graduates, Working Professionals in Tech</div>
-                  <div><strong>Key Focus:</strong> Cloud, DevOps, Data, Certifications, Leadership</div>
-                </div>
-                <Link
-                  to="/tech-career-accelerator"
-                  className="inline-flex items-center gap-2 w-full justify-center px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-lg hover:opacity-90 transition-all duration-300"
-                >
-                  Explore Tech Programs <ChevronRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </motion.div>
-
-            {/* Communication Track Overview Card */}
-            <motion.div
-              variants={fadeInUp}
-              whileHover={{ scale: 1.02, y: -5 }}
-              className="relative bg-gradient-to-br from-orange-50 to-orange-50 dark:from-gray-700 dark:to-gray-800 p-8 rounded-xl shadow-md dark:shadow-gray-700/50 overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-orange-500/5" />
-              <div className="relative z-10">
-                <Volume2 className="w-16 h-16 text-orange-600 dark:text-orange-400 mx-auto mb-4" />
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 text-center">Communication & Support Excellence</h3>
-                <div className="space-y-3 mb-6 text-sm">
-                  <div><strong>Ideal For:</strong> Freshers, BPO Aspirants, Communication Roles</div>
-                  <div><strong>Key Focus:</strong> Voice & Non-Voice Support, Soft Skills, Personality Development</div>
-                </div>
-                <Link
-                  to="/communication-support-excellence"
-                  className="inline-flex items-center gap-2 w-full justify-center px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-500 text-white font-bold rounded-lg hover:opacity-90 transition-all duration-300"
-                >
-                  Explore Communication Programs <ChevronRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </motion.div>
-          </motion.div>
+        {/* Back Side */}
+        <div className={`absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-gradient-to-br ${gradient} rounded-2xl shadow-2xl flex flex-col items-center justify-center text-center text-white p-8`}>
+          <h3 className="text-xl font-bold mb-6">{title}</h3>
+          <p className="text-base text-white/90 leading-relaxed px-4">{desc}</p>
+          <p className="mt-8 text-sm text-white/70">Tap again to flip back</p>
         </div>
-      </section>
-
-      {/* Why Choose Us? Section */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-900">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">Why Choose Us?</h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300">Proven excellence in career acceleration.</p>
-          </motion.div>
-          <motion.div
-            variants={staggerChildren}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
-          >
-            {whyChooseUs.map((highlight, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                whileHover={{ y: -5 }}
-                className="text-center p-6 rounded-xl bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-700/50"
-              >
-                <highlight.icon className="w-12 h-12 text-red-600 dark:text-red-400 mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{highlight.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{highlight.desc}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* 2. Why You Need This Course */}
-      <section className="py-20 bg-white dark:bg-gray-800">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">Why You Need This Course</h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300">Our Value Propositions</p>
-          </motion.div>
-          <motion.div
-            variants={staggerChildren}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            {benefits.map((benefit, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                whileHover={{ y: -5 }}
-                className="text-center p-6 rounded-xl shadow-md dark:shadow-gray-700/50 bg-gray-50 dark:bg-gray-700"
-              >
-                <benefit.icon className="w-12 h-12 text-red-600 dark:text-red-400 mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{benefit.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{benefit.desc}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* 3. The Interview Clearing Kit Essentials */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-900">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">The Interview Clearing Kit Essentials</h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300">Master the 5 Pillars of Interview Success.</p>
-          </motion.div>
-          <motion.div
-            variants={staggerChildren}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
-          >
-            {pillars.map((pillar, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                whileHover={{ scale: 1.02 }}
-                className="text-center p-6 rounded-xl bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-700/50"
-              >
-                <pillar.icon className="w-12 h-12 text-red-600 dark:text-red-400 mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{pillar.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">{pillar.desc}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* 4. Success Stories */}
-      <section className="py-20 bg-white dark:bg-gray-800">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">Success Stories from XourceBase Learners</h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300">Our students have transformed their careers — you can too.</p>
-          </motion.div>
-          <motion.div
-            variants={staggerChildren}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
-          >
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                whileHover={{ scale: 1.02 }}
-                className="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-md dark:shadow-gray-600/50 text-center"
-              >
-                <img src={testimonial.image} alt={testimonial.name} className="w-16 h-16 rounded-full mx-auto mb-4" />
-                <div className="flex justify-center mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                <p className="text-gray-700 dark:text-gray-300 italic mb-4">"{testimonial.quote}"</p>
-                <h4 className="font-bold text-gray-900 dark:text-white">{testimonial.name}</h4>
-                <p className="text-sm text-gray-500 dark:text-gray-400">{testimonial.job}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* 5. Call-to-Action Section */}
-      <section className="py-20 bg-gradient-to-br from-red-600 to-orange-600 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="max-w-3xl mx-auto"
-          >
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4">Ready to Accelerate Your Career?</h2>
-            <p className="text-xl mb-8">
-              Join thousands of learners mastering interviews, building confidence, and landing jobs with XourceBase.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/plans-pricing"
-                className="px-8 py-4 bg-white text-red-600 font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                View Plans and Pricing
-              </Link>
-              <Link
-                to="/contact"
-                className="px-8 py-4 border-2 border-white font-bold rounded-lg hover:bg-white hover:text-red-600 transition-all duration-300"
-              >
-                Contact Us
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-    </div>
+      </div>
+    </motion.div>
   );
-};
+}
 
-export default Home;
+export default function HomePage() {
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 },
+    },
+  };
+
+  const whyChooseFeatures = [
+    {
+      icon: Users,
+      title: 'Industry Experts',
+      desc: 'Learn from seasoned professionals actively working in tech and communication roles.',
+    },
+    {
+      icon: Rocket,
+      title: 'Hands-On Projects',
+      desc: 'Build real-world projects using tools like AWS, Kubernetes, and Terraform.',
+    },
+    {
+      icon: Zap,
+      title: '1:1 Mentorship',
+      desc: 'Personal guidance, code reviews, and career advice from industry mentors.',
+    },
+    {
+      icon: Award,
+      title: 'Career & Placement Support',
+      desc: 'Resume building, mock interviews, and dedicated placement assistance.',
+    },
+    {
+      icon: Users,
+      title: 'Strong Learning Community',
+      desc: 'Network with peers, mentors, and alumni through an active learning community.',
+    },
+    {
+      icon: Award,
+      title: 'Job-Ready Outcomes',
+      desc: 'Gain practical, interview-ready skills aligned with current industry needs.',
+    },
+  ];
+
+  const valueProps = [
+    {
+      icon: Users,
+      title: 'Real Interview Simulations',
+      desc: 'Live mocks mirroring actual company interviews.',
+    },
+    {
+      icon: Brain,
+      title: 'One-on-One Mentorship',
+      desc: 'Dedicated guidance from industry veterans.',
+    },
+    {
+      icon: FileText,
+      title: 'Resume & LinkedIn Optimization',
+      desc: 'Craft profiles that get noticed by recruiters.',
+    },
+    {
+      icon: Map,
+      title: 'Technical & Behavioral Training',
+      desc: 'Balanced prep for every interview stage.',
+    },
+    {
+      icon: Clock,
+      title: 'Cloud & DevOps Career Roadmaps',
+      desc: 'Personalized paths to your target role.',
+    },
+    {
+      icon: Star,
+      title: 'Lifetime Community Access',
+      desc: 'Ongoing support from alumni and experts.',
+    },
+  ];
+
+  const interviewKit = [
+    {
+      icon: Mic,
+      title: 'Mock Interviews',
+      desc: 'Real-time practice with expert feedback to simulate high-stakes scenarios.',
+    },
+    {
+      icon: Brain,
+      title: 'Technical Assessments',
+      desc: 'Hands-on coding challenges and quizzes tailored to top IT companies.',
+    },
+    {
+      icon: Users,
+      title: 'Communication Mastery',
+      desc: 'Voice modulation, storytelling, and STAR method for impactful responses.',
+    },
+    {
+      icon: FileText,
+      title: 'Resume & Portfolio Review',
+      desc: 'Personalized critiques to make your profile ATS-friendly and compelling.',
+    },
+    {
+      icon: Clock,
+      title: 'Confidence Coaching',
+      desc: 'Mindset sessions to overcome anxiety and build lasting interview poise.',
+    },
+  ];
+
+  // Simple Link component replacement
+  const Link = ({ href, children, className, ...props }) => (
+    <a href={href} className={className} {...props}>
+      {children}
+    </a>
+  );
+
+  return (
+    <>
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-rose-700 via-red-600 to-orange-500 text-white py-24 lg:py-32">
+        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="container mx-auto px-6 lg:px-8 relative z-10">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+            className="text-center max-w-5xl mx-auto"
+          >
+            <motion.h1
+              variants={fadeInUp}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight"
+            >
+              Fuel Your Future: Rapid Career Advancement.
+            </motion.h1>
+            <motion.p
+              variants={fadeInUp}
+              className="text-xl md:text-2xl mb-12 opacity-90"
+            >
+              XourceBase empowers students, professionals, and freshers with tailored programs in tech and communication to unlock your potential and land dream roles. Industry-aligned training, real-world projects, and personalized mentorship to help you land high-paying tech jobs.
+            </motion.p>
+            <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-6 justify-center">
+              <Link
+                href="/plans-pricing"
+                className="inline-flex items-center gap-3 px-10 py-5 text-xl font-bold bg-white text-[#8B0000] rounded-xl hover:bg-gray-100 transition-all duration-300 shadow-xl"
+              >
+                Explore Plans
+                <ArrowRight className="w-6 h-6" />
+              </Link>
+              <Link
+                href="/workshop"
+                className="inline-flex items-center gap-3 px-10 py-5 text-xl font-bold border-2 border-white rounded-xl hover:bg-white/10 transition-all duration-300"
+              >
+                Join Workshop
+                <Rocket className="w-6 h-6" />
+              </Link>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Choose Your Program Track Section */}
+      <section className="py-20 px-6 bg-[#faf3f2]" id="programs">
+        <div className="container mx-auto max-w-7xl">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+            className="text-center mb-16"
+          >
+            <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+              Our Programs
+            </motion.h2>
+            <motion.p variants={fadeInUp} className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Choose from comprehensive career accelerator programs designed for every stage.
+            </motion.p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            {/* Tech Career Accelerator Card */}
+            <motion.div
+              variants={fadeInUp}
+              whileHover={{ scale: 1.05, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="group relative bg-white rounded-3xl shadow-lg overflow-hidden border border-indigo-100 hover:shadow-2xl transition-all duration-500"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative p-10">
+                <div className="flex items-center gap-5 mb-8">
+                  <div className="p-4 bg-indigo-100 rounded-2xl group-hover:bg-indigo-200 transition-colors duration-300">
+                    <Cloud className="w-12 h-12 text-indigo-600" />
+                  </div>
+                  <h3 className="text-3xl font-bold text-gray-900">Tech Career Accelerator</h3>
+                </div>
+
+                <p className="text-lg text-gray-600 mb-6">
+                  Master Cloud & DevOps skills with hands-on training, certifications, and placement support.
+                </p>
+
+                <p className="text-lg text-gray-600 mb-6">
+                  Ideal For: Students, Graduates, Working Professionals in Tech
+                </p>
+
+                <h4 className="font-semibold text-gray-900 mb-4">Key Focus:</h4>
+                <ul className="space-y-3 mb-10">
+                  {['Cloud', 'DevOps', 'Data', 'Programming','Certifications', 'Leadership'].map((item) => (
+                    <li key={item} className="flex items-center gap-3 text-gray-700">
+                      <Zap className="w-5 h-5 text-indigo-600 flex-shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <Link
+                  href="/tech-career-accelerator"
+                  className="inline-flex items-center gap-3 px-8 py-4 text-lg font-bold bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-4 focus:ring-indigo-300 shadow-lg transition-all duration-300"
+                >
+                  Explore Tech Program
+                  <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* Communication & Support Excellence Card */}
+            <motion.div
+              variants={fadeInUp}
+              whileHover={{ scale: 1.05, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="group relative bg-white rounded-3xl shadow-lg overflow-hidden border border-teal-100 hover:shadow-2xl transition-all duration-500"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 to-green-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative p-10">
+                <div className="flex items-center gap-5 mb-8">
+                  <div className="p-4 bg-teal-100 rounded-2xl group-hover:bg-teal-200 transition-colors duration-300">
+                    <MessageSquare className="w-12 h-12 text-teal-600" />
+                  </div>
+                  <h3 className="text-3xl font-bold text-gray-900">Communication & Support Excellence</h3>
+                </div>
+
+                <p className="text-lg text-gray-600 mb-6">
+                  Build confidence, ace interviews, and communicate like a professional with expert guidance.
+                </p>
+
+                <p className="text-lg text-gray-600 mb-6">
+                  Ideal For: Freshers, BPO Aspirants, Communication Roles
+                </p>
+
+                <h4 className="font-semibold text-gray-900 mb-4">Key Focus:</h4>
+                <ul className="space-y-3 mb-10">
+                  {['Voice & Non-Voice Support', 'Soft Skills', 'Personality Development'].map((item) => (
+                    <li key={item} className="flex items-center gap-3 text-gray-700">
+                      <Zap className="w-5 h-5 text-teal-600 flex-shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <Link
+                  href="/communication-support-excellence"
+                  className="inline-flex items-center gap-3 px-8 py-4 text-lg font-bold bg-gradient-to-r from-teal-600 to-green-600 text-white rounded-xl hover:from-teal-700 hover:to-green-700 focus:outline-none focus:ring-4 focus:ring-teal-300 shadow-lg transition-all duration-300"
+                >
+                  Explore Communication Programs
+                  <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 px-6 bg-gray-50">
+        <div className="container mx-auto max-w-7xl">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+            className="text-center mb-16"
+          >
+            <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+              Why Choose XourceBase?
+            </motion.h2>
+            <motion.p variants={fadeInUp} className="text-xl text-gray-600 max-w-3xl mx-auto">
+              We bridge the gap between learning and landing your dream job. Tap or hover to reveal details.
+            </motion.p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 max-w-7xl mx-auto">
+            {whyChooseFeatures.map((item, index) => (
+              <FlipCard key={index} {...item} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Why You Need This Course Section */}
+      <section className="py-20 px-6 bg-[#faf3f2]">
+        <div className="container mx-auto max-w-7xl">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+            className="text-center mb-16"
+          >
+            <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+              Why You Need This Courses?
+            </motion.h2>
+            <motion.p variants={fadeInUp} className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Our Value Propositions. Tap or hover to reveal details.
+            </motion.p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 max-w-7xl mx-auto">
+            {valueProps.map((item, index) => (
+              <FlipCard key={index} {...item} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* The Interview Clearing Kit Essentials */}
+      <section className="py-20 px-6 bg-gray-50">
+        <div className="container mx-auto max-w-7xl">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+            className="text-center mb-16"
+          >
+            <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+              The Interview Clearing Kit Essentials
+            </motion.h2>
+            <motion.p variants={fadeInUp} className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Master the 5 Pillars of Interview Success. Tap or hover to reveal details.
+            </motion.p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 max-w-7xl mx-auto">
+            {interviewKit.map((item, index) => (
+              <FlipCard key={index} {...item} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Success Stories Section */}
+      <section className="py-20 px-6 bg-[#faf3f2] overflow-hidden">
+        <div className="container mx-auto max-w-7xl">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+            className="text-center mb-16"
+          >
+            <motion.h2
+              variants={fadeInUp}
+              className="text-3xl md:text-5xl font-bold text-gray-900 mb-6"
+            >
+              Success Stories
+            </motion.h2>
+            <motion.p
+              variants={fadeInUp}
+              className="text-xl text-gray-600 max-w-3xl mx-auto"
+            >
+              Hear from our students who transformed their careers with XourceBase.
+            </motion.p>
+          </motion.div>
+
+          <div className="relative">
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay]}
+              spaceBetween={32}
+              slidesPerView={1}
+              centeredSlides={false}
+              grabCursor={true}
+              autoplay={{
+                delay: 4000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+              }}
+              speed={800}
+              loop={true}
+              pagination={{
+                clickable: true,
+                el: '.swiper-pagination-custom',
+                bulletClass: 'swiper-pagination-bullet !bg-gray-400 !opacity-60',
+                bulletActiveClass: 'swiper-pagination-bullet-active !bg-indigo-600 !opacity-100 !scale-125',
+              }}
+              navigation={{
+                prevEl: '.prev-btn',
+                nextEl: '.next-btn',
+              }}
+              breakpoints={{
+                640: { slidesPerView: 1.2, centeredSlides: true, spaceBetween: 20 },
+                768: { slidesPerView: 2, centeredSlides: false },
+                1024: { slidesPerView: 3, centeredSlides: false },
+              }}
+              className="pb-12"
+            >
+              <SwiperSlide>
+                <div className="h-full p-1">
+                  <motion.div
+                    whileHover={{ y: -8 }}
+                    transition={{ duration: 0.4 }}
+                    className="bg-white rounded-3xl shadow-xl p-8 h-full border border-gray-100 hover:border-indigo-200 transition-all duration-500"
+                  >
+                    <div className="flex gap-1 mb-6">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-5 h-5 text-yellow-500 fill-current" viewBox="0 0 20 20">
+                          <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                        </svg>
+                      ))}
+                    </div>
+                    <p className="text-gray-700 text-base leading-relaxed mb-8 italic">
+                      "XourceBase's Tech Career Accelerator completely changed my career trajectory. The hands-on DevOps projects and certification guidance helped me land a Cloud Engineer role with a 180% salary hike!"
+                    </p>
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                        RS
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-gray-900">Rahul Sharma</h4>
+                        <p className="text-sm text-gray-600">Cloud Engineer at TechMahindra</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+              </SwiperSlide>
+
+              <SwiperSlide>
+                <div className="h-full p-1">
+                  <motion.div
+                    whileHover={{ y: -8 }}
+                    transition={{ duration: 0.4 }}
+                    className="bg-white rounded-3xl shadow-xl p-8 h-full border border-gray-100 hover:border-teal-200 transition-all duration-500"
+                  >
+                    <div className="flex gap-1 mb-6">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-5 h-5 text-yellow-500 fill-current" viewBox="0 0 20 20">
+                          <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                        </svg>
+                      ))}
+                    </div>
+                    <p className="text-gray-700 text-base leading-relaxed mb-8 italic">
+                      "As a fresher, I was nervous about interviews. The Communication program built my confidence and prepared me perfectly. Placed in an international BPO within 2 months!"
+                    </p>
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-green-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                        PP
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-gray-900">Priya Patel</h4>
+                        <p className="text-sm text-gray-600">Customer Support at Concentrix</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+              </SwiperSlide>
+
+              <SwiperSlide>
+                <div className="h-full p-1">
+                  <motion.div
+                    whileHover={{ y: -8 }}
+                    transition={{ duration: 0.4 }}
+                    className="bg-white rounded-3xl shadow-xl p-8 h-full border border-gray-100 hover:border-indigo-200 transition-all duration-500"
+                  >
+                    <div className="flex gap-1 mb-6">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-5 h-5 text-yellow-500 fill-current" viewBox="0 0 20 20">
+                          <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                        </svg>
+                      ))}
+                    </div>
+                    <p className="text-gray-700 text-base leading-relaxed mb-8 italic">
+                      "Switching to DevOps seemed impossible, but the mentorship and projects made it happen. Cleared AWS cert on first try!"
+                    </p>
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                        AV
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-gray-900">Ankit Verma</h4>
+                        <p className="text-sm text-gray-600">DevOps Engineer at Infosys</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+              </SwiperSlide>
+            </Swiper>
+
+            <button className="prev-btn absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-2xl flex items-center justify-center hover:bg-[#faf3f2] transition-all duration-300 md:flex hidden">
+              <ArrowLeft className="w-6 h-6 text-gray-800" />
+            </button>
+            <button className="next-btn absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-2xl flex items-center justify-center hover:bg-[#faf3f2] transition-all duration-300 md:flex hidden">
+              <ArrowRight className="w-6 h-6 text-gray-800" />
+            </button>
+
+            <div className="swiper-pagination-custom flex justify-center gap-2 mt-8" />
+          </div>
+        </div>
+      </section>
+
+      {/* Workshops CTA */}
+      <section className="py-20 px-6 bg-gradient-to-br from-red-900 to-red-700 text-white" id="workshops">
+        <div className="container mx-auto max-w-7xl text-center">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+          >
+            <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold mb-6">
+              Start Your Journey Today
+            </motion.h2>
+            <motion.p variants={fadeInUp} className="text-xl mb-10 opacity-90">
+              Join our upcoming workshop and take the first step toward your dream career.
+            </motion.p>
+            <motion.div variants={fadeInUp}>
+              <Link
+                href="/workshop"
+                className="inline-flex items-center gap-3 px-10 py-5 text-xl font-bold bg-white text-[#8B0000] rounded-xl hover:bg-gray-100 transition-all duration-300 shadow-xl"
+              >
+                Join Workshop Now
+                <BookOpen className="w-6 h-6" />
+              </Link>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+    </>
+  );
+}
